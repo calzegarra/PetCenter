@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Pet Center</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="cabecera"><img th:src="@{/image/logo-petcenter.png}" /></div>
+			</div>
+		</div>
+		<div class="row">
+			<br /><br />
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li role="presentation"><a href="/petcenter">Bienvenidos</a></li>
+				 	<li role="presentation" class="active"><a href="clientesmascotas">Gestión de Clientes y Mascotas</a></li>
+				  	<li role="presentation"><a href="#">Gestión de Atención Médica</a></li>
+				  	<li role="presentation"><a href="#">Gestión de Laboratorio Clínico</a></li>
+				</ul>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+				<div class="gestion_opciones">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<figure>
+								<img th:src="@{/image/dueno.jpg}" />
+								<a href="clientes"><figcaption>Clientes</figcaption></a>
+							</figure>
+						</div>
+						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+							<figure>
+								<img th:src="@{/image/mascotas.png}" />
+								<a href="mascotas"><figcaption>Mascotas</figcaption></a>
+							</figure>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+		<br /><br />
+		<br /><br />
+	</div>
+	<script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

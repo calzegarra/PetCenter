@@ -1,0 +1,59 @@
+.cabecera {
+	width: 100%;
+	padding-top: 20px;
+}
+
+.cabecera > img {
+	width: 265px;
+}
+
+.bienvenido_img {
+	width: 100%;
+	border: 2px solid #F7942E;
+	text-align: center;
+	padding: 60px;
+	height: 400px;
+}
+
+.gestion_opciones {
+	width: 100%;
+	border: 2px solid #F7942E;
+	height: 400px;
+	padding-top: 50px;
+}
+
+.gestion_opciones > div {
+	text-align: center;
+}
+
+a, a:hover, a:active, a:focus, a:visited {
+	text-decoration: none;
+}
+
+figure {
+	border: 2px solid #F7942E;
+	width: 254px;
+	margin: 0 auto;
+}
+
+figcaption {
+	background-color: #8B7E66;
+	color: white;
+	font-size: 16px;
+	height: 40px;
+	padding-top: 8px;
+}
+
+/* bootstrap */
+
+.nav-pills > li > a {
+	background-color: #F0F8FF;
+}
+
+.nav > li.active > a:focus, .nav > li.active > a:hover {
+	background-color: #337ab7 !important;
+}
+
+.nav > li > a:focus, .nav > li > a:hover {
+	background-color: #B9D3EE !important;
+}
