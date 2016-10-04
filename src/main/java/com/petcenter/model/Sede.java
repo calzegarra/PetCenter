@@ -15,9 +15,10 @@ public class Sede {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="idSede")
+	@Column(name="idsede")
 	private long idSede;
 	
+	@Column(name="descripcionsede")
 	private String descripcionSede;
 
 }

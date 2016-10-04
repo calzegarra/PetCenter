@@ -15,9 +15,10 @@ public class Pais {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="idPais")
+	@Column(name="idpais")
 	private long idPais;
 	
+	@Column(name="descripcionpais")
 	private String descripcionPais;
 
 }

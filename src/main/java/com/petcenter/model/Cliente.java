@@ -21,45 +21,63 @@ public class Cliente {
 	@Column(name="idCliente")
 	private long idCliente;
 	
+	@Column(name="codcliente")
 	private String codCliente;
 	
 	@ManyToOne
+	@Column(name="idtipocliente")
 	private TipoCliente idTipoCliente;
 	
 	@ManyToOne
+	@Column(name="idtipodocumento")
 	private TipoDocumento idTipoDocumento;
 	
+	@Column(name="idtipodocumento")
 	private String nroDocumento;
 	
+	@Column(name="nomcliente")
 	private String nomCliente;
 	
+	@Column(name="apepaternocliente")
 	private String apePaternoCliente;
 	
+	@Column(name="apematernocliente")
 	private String apeMaternoCliente;
 	
 	@ManyToOne
+	@Column(name="idgenerocliente")
 	private GeneroCliente idGeneroCliente;
 	
+	@Column(name="fecnaccliente")
 	private Date fecNacCliente;
 	
 	@ManyToOne
+	@Column(name="idsede")
 	private Sede idSede;
 	
 	@ManyToOne
+	@Column(name="iddistrito")
 	private Distrito idDistrito;
 	
+	@Column(name="direccliente")
 	private String direcCliente;
 	
+	@Column(name="celcliente")
 	private String celCliente;
 	
+	@Column(name="telfdomcliente")
 	private String telfDomCliente;
 	
+	@Column(name="telftracliente")
 	private String telfTraCliente;
 	
+	@Column(name="indnotificaciones")
 	private boolean indNotificaciones;
 	
+	@Column(name="correoelectcliente")
 	private String correoElectCliente;
 	
+	@Column(name="estadocliente")
 	private int estadoCliente;
 	
 }

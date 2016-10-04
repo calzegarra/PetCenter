@@ -15,9 +15,10 @@ public class GeneroCliente {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="idGeneroCliente")
+	@Column(name="idgenerocliente")
 	private long idGeneroCliente;
 	
+	@Column(name="descripciongenerocliente")
 	private String descripcionGeneroCliente;
 
 }

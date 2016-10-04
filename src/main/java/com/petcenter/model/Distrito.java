@@ -16,12 +16,14 @@ public class Distrito {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="idDistrito")
+	@Column(name="iddistrito")
 	private long idDistrito;
 	
+	@Column(name="descripciondistrito")
 	private String descripcionDistrito;
 	
 	@ManyToOne
+	@Column(name="idprovincia")
 	private Provincia idProvincia;
 	
 }
