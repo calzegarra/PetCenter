@@ -44,6 +44,22 @@ figcaption {
 	padding-top: 8px;
 }
 
+.the-legend {
+	padding-left: 10px;
+    border-style: none;
+    border-width: 0;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
+}
+.the-fieldset {
+    -webkit-box-shadow:  0px 0px 0px 0px #000;
+    box-shadow:  0px 0px 0px 0px #000;
+}
+
 /* bootstrap */
 
 .nav-pills > li > a {
@@ -56,4 +72,9 @@ figcaption {
 
 .nav > li > a:focus, .nav > li > a:hover {
 	background-color: #B9D3EE !important;
+}
+
+.well {
+	background-color: transparent !important;
+	background-image: inherit !important;
 }

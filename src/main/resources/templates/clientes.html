@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Pet Center</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="cabecera"><img th:src="@{/image/logo-petcenter.png}" /></div>
+			</div>
+		</div>
+		<div class="row">
+			<br /><br />
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li role="presentation"><a href="/petcenter">Bienvenidos</a></li>
+				 	<li role="presentation" class="active"><a href="clientesmascotas">Gestión de Clientes y Mascotas</a></li>
+				  	<li role="presentation"><a href="#">Gestión de Atención Médica</a></li>
+				  	<li role="presentation"><a href="#">Gestión de Laboratorio Clínico</a></li>
+				</ul>
+				<br />
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+				<ol class="breadcrumb">
+				  <li><a href="clientesmascotas">Gestión de Clientes y Mascotas</a></li>
+				</ol>
+				<fieldset class="well the-fieldset">
+			        <legend class="the-legend">Datos del Cliente</legend>
+			        <form class="form-horizontal">
+			        	<div class="row">
+			        		<div class="col-sm-6">
+			        			<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-5 control-label">Busqueda por:</label>
+								    <div class="col-sm-7">
+								    	<select class="form-control"></select>
+								    </div>
+								</div>
+			        		</div>
+			        		<div class="col-sm-6">
+			        		</div>
+			        	</div>
+			        	<div class="row">
+			        		<div class="col-sm-6">
+			        			<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-5 control-label">Tipo de Documento:</label>
+								    <div class="col-sm-7">
+								    	<select class="form-control"></select>
+								    </div>
+								</div>
+			        		</div>
+			        		<div class="col-sm-6">
+			        			<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-5 control-label">Nombre:</label>
+								    <div class="col-sm-7">
+								      <input type="text" class="form-control" id="inputEmail3" placeholder="" />
+								    </div>
+								</div>
+			        		</div>
+			        	</div>
+			        	<div class="row">
+			        		<div class="col-sm-6">
+			        			<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-5 control-label">Nº del Documento:</label>
+								    <div class="col-sm-7">
+								    	<input type="text" class="form-control" id="inputEmail3" placeholder="" />
+								    </div>
+								</div>
+			        		</div>
+			        		<div class="col-sm-6">
+			        			<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-5 control-label">Apellido Paterno:</label>
+								    <div class="col-sm-7">
+								      <input type="text" class="form-control" id="inputEmail3" placeholder="" />
+								    </div>
+								</div>
+			        		</div>
+			        	</div>
+			        	<div class="row">
+			        		<div class="col-sm-6">
+			        			<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-5 control-label">Codigo:</label>
+								    <div class="col-sm-7">
+								    	<input type="text" class="form-control" id="inputEmail3" placeholder="" />
+								    </div>
+								</div>
+			        		</div>
+			        		<div class="col-sm-6">
+			        			<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-5 control-label">Apellido Materno:</label>
+								    <div class="col-sm-7">
+								      <input type="text" class="form-control" id="inputEmail3" placeholder="" />
+								    </div>
+								</div>
+			        		</div>
+			        	</div>
+			        	<div class="row">
+			        		<div class="col-sm-12 center">
+			        			<div class="form-group">
+								    <label for="inputEmail3" class="col-sm-5 control-label"></label>
+								    <div class="col-sm-7">
+								    	<button type="button" class="btn btn-default" aria-label="Left Align">
+										  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+										  Buscar Cliente
+										</button>
+								    </div>
+								</div>
+			        		</div>
+			        	</div>
+					</form>
+			    </fieldset>
+			    <fieldset class="well the-fieldset">
+			        <legend class="the-legend">Resultados de la Búsqueda</legend>
+			        <button type="button" class="btn btn-default" aria-label="Left Align">
+					  <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					  Agregar Cliente
+					</button>
+					<br/><br/>
+					<table class="table">
+						<thead>
+							<th>Codigo</th>
+							<th>Tipo Cliente</th>
+							<th>Documento</th>
+							<th>Nombre Completo</th>
+							<th>Editar</th>
+						</thead>
+						<tbody></tbody>
+					</table>
+					
+					
+			    </fieldset>
+			</div>
+		</div>
+		<br /><br />
+		<br /><br />
+	</div>
+	<script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>
