@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -23,7 +24,7 @@ public class Provincia {
 	private String descripcionProvincia;
 	
 	@ManyToOne
-	@Column(name="idpais")
-	private Pais idPais;
+	@JoinColumn(name="idpais", insertable=false, updatable=false)
+	private Pais pais;
 	
 }

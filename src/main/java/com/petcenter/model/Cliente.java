@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -18,21 +19,21 @@ public class Cliente {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="idCliente")
+	@Column(name="idcliente")
 	private long idCliente;
 	
 	@Column(name="codcliente")
 	private String codCliente;
 	
 	@ManyToOne
-	@Column(name="idtipocliente")
+	@JoinColumn(name="idtipocliente", insertable=false, updatable=false)
 	private TipoCliente idTipoCliente;
 	
 	@ManyToOne
-	@Column(name="idtipodocumento")
-	private TipoDocumento idTipoDocumento;
+	@JoinColumn(name="idtipodocumento", insertable=false, updatable=false)
+	private TipoDocumento tipoDocumento;
 	
-	@Column(name="idtipodocumento")
+	@Column(name="nrodocumento")
 	private String nroDocumento;
 	
 	@Column(name="nomcliente")
@@ -45,19 +46,19 @@ public class Cliente {
 	private String apeMaternoCliente;
 	
 	@ManyToOne
-	@Column(name="idgenerocliente")
-	private GeneroCliente idGeneroCliente;
+	@JoinColumn(name="idgenerocliente", insertable=false, updatable=false)
+	private GeneroCliente generoCliente;
 	
 	@Column(name="fecnaccliente")
 	private Date fecNacCliente;
 	
 	@ManyToOne
-	@Column(name="idsede")
-	private Sede idSede;
+	@JoinColumn(name="idsede", insertable=false, updatable=false)
+	private Sede sede;
 	
 	@ManyToOne
-	@Column(name="iddistrito")
-	private Distrito idDistrito;
+	@JoinColumn(name="iddistrito", insertable=false, updatable=false)
+	private Distrito distrito;
 	
 	@Column(name="direccliente")
 	private String direcCliente;

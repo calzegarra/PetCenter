@@ -130,7 +130,19 @@
 							<th>Nombre Completo</th>
 							<th>Editar</th>
 						</thead>
-						<tbody></tbody>
+						<tbody>
+							<tr th:each="c : ${clientes}">
+								<td th:text="${c.codCliente}"></td>
+								<td th:text="${c.tipoCliente}"></td>
+								<td th:text="${c.documento}"></td>
+								<td th:text="${c.nombreCompleto}"></td>
+								<td>
+									<a type="button" class="btn btn-default" aria-label="Left Align" href="#">
+									  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+									</a>
+								</td>
+							</tr>
+						</tbody>
 					</table>
 					
 					
