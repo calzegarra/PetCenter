@@ -15,9 +15,10 @@ public class TipoDocumento {
 	
 	@Id
 	@GeneratedValue
-	@Column(name="idTipoDocumento")
+	@Column(name="idtipodocumento")
 	private long idTipoDocumento;
 	
+	@Column(name="descripciontipodocumento")
 	private String descripcionTipoDocumento;
 	
 }
