@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Pet Center</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="cabecera"><img th:src="@{/image/logo-petcenter.png}" /></div>
+			</div>
+		</div>
+		<div class="row">
+			<br /><br />
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li role="presentation"><a href="/petcenter">Bienvenidos</a></li>
+				 	<li role="presentation" class="active"><a href="clientesmascotas">Gestión de Clientes y Mascotas</a></li>
+				  	<li role="presentation"><a href="#">Gestión de Atención Médica</a></li>
+				  	<li role="presentation"><a href="#">Gestión de Laboratorio Clínico</a></li>
+				</ul>
+				<br />
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+				<ol class="breadcrumb">
+				  <li><a href="/petcenter/clientes/">Gestión de Clientes y Mascotas</a></li>
+				  <li class="active">Crear</li>
+				</ol>
+				<fieldset class="well the-fieldset">
+			        <legend class="the-legend">Guaradar Cliente</legend>
+			        <form class="form-horizontal">
+			          <div class="form-group">
+					    <label for="codCliente" class="col-sm-2 control-label">Codigo</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="codCliente" name="codCliente" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="tipoCliente" class="col-sm-2 control-label">Tipo de Cliente</label>
+					    <div class="col-sm-10">
+					      <select class="form-control" id="tipoCliente" name="tipoCliente">
+						  	<option th:each="tc : ${tipoClientes}" th:value="${tc.idTipoCliente}" th:text="${tc.descripcionTipoCliente}"></option>					      
+					      </select>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="tipoDocumento" class="col-sm-2 control-label">Tipo de Documento</label>
+					    <div class="col-sm-10">
+					      <select class="form-control" id="tipoDocumento" name="tipoDocumento">
+					      	<option th:each="td : ${tipoDocumentos}" th:value="${td.idTipoDocumento}" th:text="${td.descripcionTipoDocumento}"></option>
+					      </select>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="nroDocumento" class="col-sm-2 control-label">Nº Documento</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="nroDocumento" name="nroDocumento" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="nomCliente" class="col-sm-2 control-label">Nombres</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="nomCliente" name="nomCliente" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="apePaternoCliente" class="col-sm-2 control-label">Apellido Paterno</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="apePaternoCliente" name="apePaternoCliente" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="apeMaternoCliente" class="col-sm-2 control-label">Apellido Materno</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="apeMaternoCliente" name="apeMaternoCliente" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="generoCliente" class="col-sm-2 control-label">Genero</label>
+					    <div class="col-sm-10">
+					      <select class="form-control" id="generoCliente" name="generoCliente">
+					      	<option th:each="g : ${generos}" th:value="${g.idGeneroCliente}" th:text="${g.descripcionGeneroCliente}"></option>
+					      </select>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="fecNacCliente" class="col-sm-2 control-label">Fecha Nacimiento</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="fecNacCliente" name="fecNacCliente" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="sede" class="col-sm-2 control-label">Sede</label>
+					    <div class="col-sm-10">
+					      <select class="form-control" id="sede" name="sede">
+					      	<option th:each="s : ${sedes}" th:value="${s.idSede}" th:text="${s.descripcionSede}"></option>
+					      </select>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="distrito" class="col-sm-2 control-label">Distrito</label>
+					    <div class="col-sm-10">
+					      <select class="form-control" id="distrito" name="distrito">
+					      	<option th:each="d : ${distritos}" th:value="${d.idDistrito}" th:text="${d.descripcionDistrito}"></option>
+					      </select>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="direcCliente" class="col-sm-2 control-label">Dirección</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="direcCliente" name="direcCliente" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="celCliente" class="col-sm-2 control-label">Celular</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="celCliente" name="celCliente" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="telfDomCliente" class="col-sm-2 control-label">Telefono Fijo</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="telfDomCliente" name="telfDomCliente" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="telfTraCliente" class="col-sm-2 control-label">Telefono del Trabajo</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="telfTraCliente" name="telfTraCliente" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="telfTraCliente" class="col-sm-2 control-label">Telefono del Trabajo</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="telfTraCliente" name="telfTraCliente" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="correoElectCliente" class="col-sm-2 control-label">Email</label>
+					    <div class="col-sm-10">
+					      <input type="text" class="form-control" id="correoElectCliente" name="correoElectCliente" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <div class="col-sm-offset-2 col-sm-10">
+					      <button type="submit" class="btn btn-default">Guardar</button>
+					    </div>
+					  </div>
+					</form>
+			    </fieldset>
+			</div>
+		</div>
+		<br /><br />
+		<br /><br />
+	</div>
+	<script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

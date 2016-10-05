@@ -27,7 +27,7 @@ public class Cliente {
 	
 	@ManyToOne
 	@JoinColumn(name="idtipocliente", insertable=false, updatable=false)
-	private TipoCliente idTipoCliente;
+	private TipoCliente tipoCliente;
 	
 	@ManyToOne
 	@JoinColumn(name="idtipodocumento", insertable=false, updatable=false)

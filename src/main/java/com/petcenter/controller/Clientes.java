@@ -9,6 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.petcenter.crud.ClienteRepository;
+import com.petcenter.crud.DistritoRepository;
+import com.petcenter.crud.GeneroRepository;
+import com.petcenter.crud.SedeRepository;
+import com.petcenter.crud.TipoClienteRepository;
 import com.petcenter.crud.TipoDocumentoRepository;
 import com.petcenter.dto.ClienteDto;
 import com.petcenter.model.Cliente;
@@ -17,10 +21,22 @@ import com.petcenter.model.Cliente;
 public class Clientes {
 	
 	@Autowired
+	ClienteRepository clienteRepository;
+	
+	@Autowired
 	TipoDocumentoRepository tipoDocumentosRep;
 	
 	@Autowired
-	ClienteRepository clienteRepository;
+	TipoClienteRepository tipoClienteRep;
+	
+	@Autowired
+	GeneroRepository generoRep;
+	
+	@Autowired
+	SedeRepository sedeRep;
+	
+	@Autowired
+	DistritoRepository distritoRep;
 	
 	@RequestMapping("/clientes")
 	public String clientes(Model model){
@@ -32,7 +48,7 @@ public class Clientes {
 			ClienteDto cDto = new ClienteDto();
 			cDto.setIdCliente(c.getIdCliente());
 			cDto.setCodCliente(c.getCodCliente());
-			cDto.setTipoCliente(c.getIdTipoCliente().getDescripcionTipoCliente());
+			cDto.setTipoCliente(c.getTipoCliente().getDescripcionTipoCliente());
 			cDto.setDocumento(c.getTipoDocumento().getDescripcionTipoDocumento() + " - " + c.getNroDocumento());
 			cDto.setNombreCompleto(c.getApePaternoCliente() + " " + c.getApeMaternoCliente() + ", " + c.getNomCliente());
 			clientesDto.add(cDto);
@@ -41,5 +57,17 @@ public class Clientes {
 		
 		return "clientes";
 	}
+	
+	
+	@RequestMapping("/clientes/crear")
+	public String guardarcliente(Model model){
+		model.addAttribute("tipoDocumentos", tipoDocumentosRep.findAll());
+		model.addAttribute("tipoClientes", tipoClienteRep.findAll());
+		model.addAttribute("generos", generoRep.findAll());
+		model.addAttribute("sedes", sedeRep.findAll());
+		model.addAttribute("distritos", distritoRep.findAll());
+		return "guardarcliente";
+	}
+	
 	
 }
