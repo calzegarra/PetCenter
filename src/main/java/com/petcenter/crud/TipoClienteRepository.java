@@ -9,5 +9,7 @@ import com.petcenter.model.TipoCliente;
 public interface TipoClienteRepository extends CrudRepository<TipoCliente, Long> {
 	
 	List<TipoCliente> findAll();
+	
+	TipoCliente findByIdTipoCliente(long idTipoCliente);
 
 }

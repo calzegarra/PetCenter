@@ -9,5 +9,7 @@ import com.petcenter.model.TipoDocumento;
 public interface TipoDocumentoRepository extends CrudRepository<TipoDocumento, Long> {
 
 	List<TipoDocumento> findAll();
-
+	
+	TipoDocumento findByIdTipoDocumento(long idTipoDocumento);
+	
 }

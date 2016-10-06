@@ -32,121 +32,121 @@
 				</ol>
 				<fieldset class="well the-fieldset">
 			        <legend class="the-legend">Guaradar Cliente</legend>
-			        <form class="form-horizontal">
+			        <form class="form-horizontal" action="guardar" method="post">
 			          <div class="form-group">
-					    <label for="codCliente" class="col-sm-2 control-label">Codigo</label>
-					    <div class="col-sm-10">
+					    <label for="codCliente" class="col-sm-3 control-label">Codigo</label>
+					    <div class="col-sm-9">
 					      <input type="text" class="form-control" id="codCliente" name="codCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="tipoCliente" class="col-sm-2 control-label">Tipo de Cliente</label>
-					    <div class="col-sm-10">
+					    <label for="tipoCliente" class="col-sm-3 control-label">Tipo de Cliente</label>
+					    <div class="col-sm-9">
 					      <select class="form-control" id="tipoCliente" name="tipoCliente">
 						  	<option th:each="tc : ${tipoClientes}" th:value="${tc.idTipoCliente}" th:text="${tc.descripcionTipoCliente}"></option>					      
 					      </select>
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="tipoDocumento" class="col-sm-2 control-label">Tipo de Documento</label>
-					    <div class="col-sm-10">
+					    <label for="tipoDocumento" class="col-sm-3 control-label">Tipo de Documento</label>
+					    <div class="col-sm-9">
 					      <select class="form-control" id="tipoDocumento" name="tipoDocumento">
 					      	<option th:each="td : ${tipoDocumentos}" th:value="${td.idTipoDocumento}" th:text="${td.descripcionTipoDocumento}"></option>
 					      </select>
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="nroDocumento" class="col-sm-2 control-label">Nº Documento</label>
-					    <div class="col-sm-10">
+					    <label for="nroDocumento" class="col-sm-3 control-label">Nº Documento</label>
+					    <div class="col-sm-9">
 					      <input type="text" class="form-control" id="nroDocumento" name="nroDocumento" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="nomCliente" class="col-sm-2 control-label">Nombres</label>
-					    <div class="col-sm-10">
+					    <label for="nomCliente" class="col-sm-3 control-label">Nombres</label>
+					    <div class="col-sm-9">
 					      <input type="text" class="form-control" id="nomCliente" name="nomCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="apePaternoCliente" class="col-sm-2 control-label">Apellido Paterno</label>
-					    <div class="col-sm-10">
+					    <label for="apePaternoCliente" class="col-sm-3 control-label">Apellido Paterno</label>
+					    <div class="col-sm-9">
 					      <input type="text" class="form-control" id="apePaternoCliente" name="apePaternoCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="apeMaternoCliente" class="col-sm-2 control-label">Apellido Materno</label>
-					    <div class="col-sm-10">
+					    <label for="apeMaternoCliente" class="col-sm-3 control-label">Apellido Materno</label>
+					    <div class="col-sm-9">
 					      <input type="text" class="form-control" id="apeMaternoCliente" name="apeMaternoCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="generoCliente" class="col-sm-2 control-label">Genero</label>
-					    <div class="col-sm-10">
+					    <label for="generoCliente" class="col-sm-3 control-label">Genero</label>
+					    <div class="col-sm-9">
 					      <select class="form-control" id="generoCliente" name="generoCliente">
 					      	<option th:each="g : ${generos}" th:value="${g.idGeneroCliente}" th:text="${g.descripcionGeneroCliente}"></option>
 					      </select>
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="fecNacCliente" class="col-sm-2 control-label">Fecha Nacimiento</label>
-					    <div class="col-sm-10">
+					    <label for="fecNacCliente" class="col-sm-3 control-label">Fecha Nacimiento</label>
+					    <div class="col-sm-9">
 					      <input type="text" class="form-control" id="fecNacCliente" name="fecNacCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="sede" class="col-sm-2 control-label">Sede</label>
-					    <div class="col-sm-10">
+					    <label for="sede" class="col-sm-3 control-label">Sede</label>
+					    <div class="col-sm-9">
 					      <select class="form-control" id="sede" name="sede">
 					      	<option th:each="s : ${sedes}" th:value="${s.idSede}" th:text="${s.descripcionSede}"></option>
 					      </select>
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="distrito" class="col-sm-2 control-label">Distrito</label>
-					    <div class="col-sm-10">
+					    <label for="distrito" class="col-sm-3 control-label">Distrito</label>
+					    <div class="col-sm-9">
 					      <select class="form-control" id="distrito" name="distrito">
 					      	<option th:each="d : ${distritos}" th:value="${d.idDistrito}" th:text="${d.descripcionDistrito}"></option>
 					      </select>
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="direcCliente" class="col-sm-2 control-label">Dirección</label>
-					    <div class="col-sm-10">
+					    <label for="direcCliente" class="col-sm-3 control-label">Dirección</label>
+					    <div class="col-sm-9">
 					      <input type="text" class="form-control" id="direcCliente" name="direcCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="celCliente" class="col-sm-2 control-label">Celular</label>
-					    <div class="col-sm-10">
+					    <label for="celCliente" class="col-sm-3 control-label">Celular</label>
+					    <div class="col-sm-9">
 					      <input type="text" class="form-control" id="celCliente" name="celCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="telfDomCliente" class="col-sm-2 control-label">Telefono Fijo</label>
-					    <div class="col-sm-10">
+					    <label for="telfDomCliente" class="col-sm-3 control-label">Telefono Fijo</label>
+					    <div class="col-sm-9">
 					      <input type="text" class="form-control" id="telfDomCliente" name="telfDomCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="telfTraCliente" class="col-sm-2 control-label">Telefono del Trabajo</label>
-					    <div class="col-sm-10">
+					    <label for="telfTraCliente" class="col-sm-3 control-label">Telefono del Trabajo</label>
+					    <div class="col-sm-9">
 					      <input type="text" class="form-control" id="telfTraCliente" name="telfTraCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="telfTraCliente" class="col-sm-2 control-label">Telefono del Trabajo</label>
-					    <div class="col-sm-10">
+					    <label for="telfTraCliente" class="col-sm-3 control-label">Telefono del Trabajo</label>
+					    <div class="col-sm-9">
 					      <input type="text" class="form-control" id="telfTraCliente" name="telfTraCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <label for="correoElectCliente" class="col-sm-2 control-label">Email</label>
-					    <div class="col-sm-10">
+					    <label for="correoElectCliente" class="col-sm-3 control-label">Email</label>
+					    <div class="col-sm-9">
 					      <input type="text" class="form-control" id="correoElectCliente" name="correoElectCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
-					    <div class="col-sm-offset-2 col-sm-10">
+					    <div class="col-sm-offset-3 col-sm-9">
 					      <button type="submit" class="btn btn-default">Guardar</button>
 					    </div>
 					  </div>
@@ -158,6 +158,15 @@
 		<br /><br />
 	</div>
 	<script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/moment.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap-datetimepicker.js}"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$("#fecNacCliente").datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
+	});
+	</script>
 </body>
 </html>

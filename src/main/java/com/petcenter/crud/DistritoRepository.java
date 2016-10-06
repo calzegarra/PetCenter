@@ -10,4 +10,6 @@ public interface DistritoRepository extends CrudRepository<Distrito, Long> {
 
 	List<Distrito> findAll();
 	
+	Distrito findByIdDistrito(long idDistrito);
+	
 }

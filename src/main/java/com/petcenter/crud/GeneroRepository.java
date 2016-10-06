@@ -10,4 +10,6 @@ public interface GeneroRepository extends CrudRepository<GeneroCliente, Long> {
 	
 	List<GeneroCliente> findAll();
 	
+	GeneroCliente findByIdGeneroCliente(long idGeneroCliente);
+	
 }

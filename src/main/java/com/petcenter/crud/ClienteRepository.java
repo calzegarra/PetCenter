@@ -10,4 +10,6 @@ public interface ClienteRepository extends CrudRepository<Cliente, Long> {
 
 	List<Cliente> findAll();
 	
+	Cliente findByIdCliente(long idCliente);
+	
 }

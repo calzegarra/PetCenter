@@ -10,4 +10,6 @@ public interface SedeRepository extends CrudRepository<Sede, Long> {
 
 	List<Sede> findAll();
 	
+	Sede findByIdSede(long idSede);
+	
 }

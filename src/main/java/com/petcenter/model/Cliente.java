@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,7 +19,7 @@ import lombok.Data;
 public class Cliente {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="idcliente")
 	private long idCliente;
 	
@@ -26,11 +27,11 @@ public class Cliente {
 	private String codCliente;
 	
 	@ManyToOne
-	@JoinColumn(name="idtipocliente", insertable=false, updatable=false)
+	@JoinColumn(name="idtipocliente", insertable=true, updatable=true)
 	private TipoCliente tipoCliente;
 	
 	@ManyToOne
-	@JoinColumn(name="idtipodocumento", insertable=false, updatable=false)
+	@JoinColumn(name="idtipodocumento", insertable=true, updatable=true)
 	private TipoDocumento tipoDocumento;
 	
 	@Column(name="nrodocumento")
@@ -46,18 +47,18 @@ public class Cliente {
 	private String apeMaternoCliente;
 	
 	@ManyToOne
-	@JoinColumn(name="idgenerocliente", insertable=false, updatable=false)
+	@JoinColumn(name="idgenerocliente", insertable=true, updatable=true)
 	private GeneroCliente generoCliente;
 	
 	@Column(name="fecnaccliente")
 	private Date fecNacCliente;
 	
 	@ManyToOne
-	@JoinColumn(name="idsede", insertable=false, updatable=false)
+	@JoinColumn(name="idsede", insertable=true, updatable=true)
 	private Sede sede;
 	
 	@ManyToOne
-	@JoinColumn(name="iddistrito", insertable=false, updatable=false)
+	@JoinColumn(name="iddistrito", insertable=true, updatable=true)
 	private Distrito distrito;
 	
 	@Column(name="direccliente")
