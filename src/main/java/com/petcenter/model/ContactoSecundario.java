@@ -3,6 +3,7 @@ package com.petcenter.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -16,16 +17,16 @@ import lombok.Data;
 public class ContactoSecundario {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="idcontactosecundario")
 	private long idContactoSecundario;
 	
 	@ManyToOne
-	@JoinColumn(name="idparentcontactoseccli", insertable=false, updatable=false)
+	@JoinColumn(name="idparentcontactoseccli", insertable=true, updatable=true)
 	private ParentContactoSecCli parentContactoSecCli;
 	
 	@ManyToOne
-	@JoinColumn(name="idcliente", insertable=false, updatable=false)
+	@JoinColumn(name="idcliente", insertable=true, updatable=true)
 	private Cliente cliente;
 	
 	@Column(name="nomcontactosec")

@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -18,7 +19,7 @@ import lombok.Data;
 public class Mascota {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="idmascota")
 	private long idMascota;
 	
@@ -29,15 +30,15 @@ public class Mascota {
 	private String nomMascota;
 	
 	@ManyToOne
-	@JoinColumn(name="idcliente", insertable=false, updatable=false)
+	@JoinColumn(name="idcliente", insertable=true, updatable=true)
 	private Cliente cliente;
 	
 	@ManyToOne
-	@JoinColumn(name="idrelclientemascota", insertable=false, updatable=false)
+	@JoinColumn(name="idrelclientemascota", insertable=true, updatable=true)
 	private RelClienteMascota relClienteMascota;
 	
 	@ManyToOne
-	@JoinColumn(name="idraza", insertable=false, updatable=false)
+	@JoinColumn(name="idraza", insertable=true, updatable=true)
 	private Raza raza;
 	
 	@Column(name="fotomascota")
@@ -50,7 +51,7 @@ public class Mascota {
 	private String descMascota;
 	
 	@ManyToOne
-	@JoinColumn(name="generomascota", insertable=false, updatable=false)
+	@JoinColumn(name="generomascota", insertable=true, updatable=true)
 	private GeneroMascota generoMascota;
 	
 	@Column(name="fechanacmascota")

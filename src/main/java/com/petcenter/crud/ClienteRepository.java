@@ -12,4 +12,6 @@ public interface ClienteRepository extends CrudRepository<Cliente, Long> {
 	
 	Cliente findByIdCliente(long idCliente);
 	
+	Cliente findByNroDocumento(String nroDocumento);
+	
 }
