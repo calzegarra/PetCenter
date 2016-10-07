@@ -73,7 +73,7 @@ public class Cliente {
 	
 	@Column(name="fecnaccliente")
 	@NotNull(message="Debe informar Fecha de Nacimiento")
-	@DateTimeFormat(pattern="dd/MM/YY")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	@MayorDeEdad
 	private Date fecNacCliente;
 	

@@ -33,22 +33,24 @@
 				<fieldset class="well the-fieldset">
 			        <legend class="the-legend">Nuevo Cliente</legend>
 			        
-			        <form class="form-horizontal" method="post"  th:action="@{guardar}" th:object="${cliente}">
+			        <form class="form-horizontal" method="post" th:object="${cliente}">
 			        	
 			  		<ul>
 					  <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
 					</ul>
+					
+						<input type="hidden" th:value="${clienteEnc.idCliente}" id="idCliente" name="idCliente" />
 			        	
 			          <div class="form-group">
 					    <label for="codCliente" class="col-sm-3 control-label">Codigo</label>
 					    <div class="col-sm-9">
-					      <input type="text" th:value="${cliente.codCliente}" class="form-control" id="codCliente" name="codCliente" placeholder="" />
+					      <input type="text" th:value="${clienteEnc.codCliente}" class="form-control" id="codCliente" name="codCliente" placeholder="" readonly="readonly" />
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="tipoCliente" class="col-sm-3 control-label">Tipo de Cliente</label>
 					    <div class="col-sm-9">
-					      <select class="form-control" id="tipoCliente" name="tipoCliente" th:selected="${cliente.tipoCliente}">
+					      <select class="form-control" id="tipoCliente" name="tipoCliente" th:selected="${clienteEnc.tipoCliente}">
 						  	<option th:each="tc : ${tipoClientes}" th:value="${tc.idTipoCliente}" th:text="${tc.descripcionTipoCliente}"></option>					      
 					      </select>
 					    </div>
@@ -56,7 +58,7 @@
 					  <div class="form-group">
 					    <label for="tipoDocumento" class="col-sm-3 control-label">Tipo de Documento</label>
 					    <div class="col-sm-9">
-					      <select class="form-control" id="tipoDocumento" name="tipoDocumento" th:selected="${cliente.tipoDocumento}">
+					      <select class="form-control" id="tipoDocumento" name="tipoDocumento" th:selected="${clienteEnc.tipoCliente}">
 					      	<option th:each="td : ${tipoDocumentos}" th:value="${td.idTipoDocumento}" th:text="${td.descripcionTipoDocumento}"></option>
 					      </select>
 					    </div>
@@ -64,31 +66,31 @@
 					  <div class="form-group">
 					    <label for="nroDocumento" class="col-sm-3 control-label">Nº Documento</label>
 					    <div class="col-sm-9">
-					      <input type="text" th:value="${cliente.nroDocumento}" class="form-control" id="nroDocumento" name="nroDocumento" placeholder="" />
+					      <input type="text" th:value="${clienteEnc.nroDocumento}" class="form-control" id="nroDocumento" name="nroDocumento" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="nomCliente" class="col-sm-3 control-label">Nombres</label>
 					    <div class="col-sm-9">
-					      <input type="text" th:value="${cliente.nomCliente}" class="form-control" id="nomCliente" name="nomCliente" placeholder="" />
+					      <input type="text" th:value="${clienteEnc.nomCliente}" class="form-control" id="nomCliente" name="nomCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="apePaternoCliente" class="col-sm-3 control-label">Apellido Paterno</label>
 					    <div class="col-sm-9">
-					      <input type="text" th:value="${cliente.apePaternoCliente}" class="form-control" id="apePaternoCliente" name="apePaternoCliente" placeholder="" />
+					      <input type="text" th:value="${clienteEnc.apePaternoCliente}" class="form-control" id="apePaternoCliente" name="apePaternoCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="apeMaternoCliente" class="col-sm-3 control-label">Apellido Materno</label>
 					    <div class="col-sm-9">
-					      <input type="text" th:value="${cliente.apeMaternoCliente}" class="form-control" id="apeMaternoCliente" name="apeMaternoCliente" placeholder="" />
+					      <input type="text" th:value="${clienteEnc.apeMaternoCliente}" class="form-control" id="apeMaternoCliente" name="apeMaternoCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="generoCliente" class="col-sm-3 control-label">Genero</label>
 					    <div class="col-sm-9">
-					      <select class="form-control" id="generoCliente" name="generoCliente" th:selected="${cliente.generoCliente}">
+					      <select class="form-control" id="generoCliente" name="generoCliente" th:selected="${clienteEnc.generoCliente}">
 					      	<option th:each="g : ${generos}" th:value="${g.idGeneroCliente}" th:text="${g.descripcionGeneroCliente}"></option>
 					      </select>
 					    </div>
@@ -96,13 +98,13 @@
 					  <div class="form-group">
 					    <label for="fecNacCliente" class="col-sm-3 control-label">Fecha Nacimiento</label>
 					    <div class="col-sm-9">
-					      <input type="text" class="form-control" id="fecNacCliente" name="fecNacCliente" placeholder="" />
+					      <input type="text" th:value="${clienteEnc.fecNacCliente}" class="form-control" id="fecNacCliente" name="fecNacCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="sede" class="col-sm-3 control-label">Sede</label>
 					    <div class="col-sm-9">
-					      <select class="form-control" id="sede" name="sede" th:selected="${cliente.sede}">
+					      <select class="form-control" id="sede" name="sede" th:selected="${clienteEnc.sede}">
 					      	<option th:each="s : ${sedes}" th:value="${s.idSede}" th:text="${s.descripcionSede}"></option>
 					      </select>
 					    </div>
@@ -110,7 +112,7 @@
 					  <div class="form-group">
 					    <label for="distrito" class="col-sm-3 control-label">Distrito</label>
 					    <div class="col-sm-9">
-					      <select class="form-control" id="distrito" name="distrito" th:selected="${cliente.distrito}">
+					      <select class="form-control" id="distrito" name="distrito" th:selected="${clienteEnc.distrito}">
 					      	<option th:each="d : ${distritos}" th:value="${d.idDistrito}" th:text="${d.descripcionDistrito}"></option>
 					      </select>
 					    </div>
@@ -118,31 +120,31 @@
 					  <div class="form-group">
 					    <label for="direcCliente" class="col-sm-3 control-label">Dirección</label>
 					    <div class="col-sm-9">
-					      <input type="text" th:value="${cliente.direcCliente}" class="form-control" id="direcCliente" name="direcCliente" placeholder="" />
+					      <input type="text" th:value="${clienteEnc.direcCliente}" class="form-control" id="direcCliente" name="direcCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="celCliente" class="col-sm-3 control-label">Celular</label>
 					    <div class="col-sm-9">
-					      <input type="text" th:value="${cliente.celCliente}" class="form-control" id="celCliente" name="celCliente" placeholder="" />
+					      <input type="text" th:value="${clienteEnc.direcCliente}" class="form-control" id="celCliente" name="celCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="telfDomCliente" class="col-sm-3 control-label">Telefono Fijo</label>
 					    <div class="col-sm-9">
-					      <input type="text" th:value="${cliente.telfDomCliente}" class="form-control" id="telfDomCliente" name="telfDomCliente" placeholder="" />
+					      <input type="text" th:value="${clienteEnc.telfDomCliente}" class="form-control" id="telfDomCliente" name="telfDomCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="telfTraCliente" class="col-sm-3 control-label">Telefono del Trabajo</label>
 					    <div class="col-sm-9">
-					      <input type="text" th:value="${cliente.telfTraCliente}" class="form-control" id="telfTraCliente" name="telfTraCliente" placeholder="" />
+					      <input type="text" th:value="${clienteEnc.telfTraCliente}" class="form-control" id="telfTraCliente" name="telfTraCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="correoElectCliente" class="col-sm-3 control-label">Email</label>
 					    <div class="col-sm-9">
-					      <input type="text" th:value="${cliente.correoElectCliente}" class="form-control" id="correoElectCliente" name="correoElectCliente" placeholder="" />
+					      <input type="text" th:value="${clienteEnc.correoElectCliente}" class="form-control" id="correoElectCliente" name="correoElectCliente" placeholder="" />
 					    </div>
 					  </div>
 					  <div class="form-group">
