@@ -13,8 +13,7 @@ public class ClienteExistenteValidation implements ConstraintValidator<ClienteEx
 	ClienteRepository clienteRep;
 	
 	@Override
-	public void initialize(ClienteExistente arg0) {
-	}
+	public void initialize(ClienteExistente arg0) {}
 
 	@Override
 	public boolean isValid(String codigo, ConstraintValidatorContext arg1) {
