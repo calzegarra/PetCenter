@@ -6,7 +6,6 @@ import javax.validation.ConstraintValidatorContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.petcenter.crud.ClienteRepository;
-import com.petcenter.model.Cliente;
 
 public class ClienteExistenteValidation implements ConstraintValidator<ClienteExistente, String>{
 	
@@ -19,10 +18,13 @@ public class ClienteExistenteValidation implements ConstraintValidator<ClienteEx
 
 	@Override
 	public boolean isValid(String codigo, ConstraintValidatorContext arg1) {
-		if(codigo != "" || codigo != null){
-			Cliente c = clienteRep.findByNroDocumento(codigo);
-			if(c != null){
-				return false;
+		if(codigo != ""){
+			if(clienteRep != null){
+				if(clienteRep.findByNroDocumento(codigo) != null){
+					return false;
+				} else {
+					return true;
+				}
 			} else {
 				return true;
 			}
