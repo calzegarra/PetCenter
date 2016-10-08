@@ -9,8 +9,11 @@ public class Util {
 	public Util(){}
 	
 	public String DatetoString(Date date) {
-		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
-		return df.format(date);
+		if(date != null){
+			DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+			return df.format(date);
+		}
+		return "";
 	}
 	
 }

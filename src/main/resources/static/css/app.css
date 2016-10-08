@@ -62,6 +62,7 @@ figcaption {
 
 .content_center {
 	margin: 0 auto;
+	text-align: center;
 }
 
 /* bootstrap */
