@@ -60,6 +60,10 @@ figcaption {
     box-shadow:  0px 0px 0px 0px #000;
 }
 
+.content_center {
+	margin: 0 auto;
+}
+
 /* bootstrap */
 
 .nav-pills > li > a {

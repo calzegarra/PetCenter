@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.petcenter.validation.ClienteExistente;
 import com.petcenter.validation.MayorDeEdad;
 
 import lombok.Data;
@@ -24,6 +23,8 @@ import lombok.Data;
 @Table(name="tb_cliente")
 @Data
 public class Cliente {
+	
+	public Cliente(){}
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -48,7 +49,6 @@ public class Cliente {
 	@Column(name="nrodocumento")
 	@NotNull(message="Debe informar Nº del documento")
 	@NotBlank(message="Debe informar Nº del documento")
-	@ClienteExistente
 	private String nroDocumento;
 	
 	@Column(name="nomcliente")

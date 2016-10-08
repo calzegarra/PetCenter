@@ -8,8 +8,7 @@ import javax.validation.ConstraintValidatorContext;
 public class MayorDeEdadValidation implements ConstraintValidator<MayorDeEdad, Date> {
 
 	@Override
-	public void initialize(MayorDeEdad arg0) {
-	}
+	public void initialize(MayorDeEdad arg0) {}
 
 	@Override
 	public boolean isValid(Date fecha, ConstraintValidatorContext arg1) {
