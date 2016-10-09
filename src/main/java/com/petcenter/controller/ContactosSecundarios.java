@@ -34,10 +34,13 @@ public class ContactosSecundarios {
 		Cliente cliente = clienteRepository.findByIdCliente(id);
 		model.addAttribute("cliente", cliente);
 		if(contactoSecundarioRep.findByCliente(cliente) != null){
-			model.addAttribute("contactosecundario", contactoSecundarioRep.findByCliente(cliente));
-			model.addAttribute("idContactoSecundario", ""+contactoSecundarioRep.findByCliente(cliente).getIdContactoSecundario());
+			ContactoSecundario contactoSecundario = contactoSecundarioRep.findByCliente(cliente);
+			model.addAttribute("contactosecundario", contactoSecundario);
+			model.addAttribute("idContactoSecundario", ""+contactoSecundario.getIdContactoSecundario());
+			model.addAttribute("parentescoID", contactoSecundario.getParentContactoSecCli().getIdParentContactoSecCli());
 		} else {
 			model.addAttribute("contactosecundario", new ContactoSecundario());
+			model.addAttribute("parentescoID", "");
 			model.addAttribute("idContactoSecundario", "");
 		}
 		model.addAttribute("parestescos",parentescoContactoRep.findAll());

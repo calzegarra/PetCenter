@@ -65,7 +65,7 @@
 					    <label for="parentContactoSecCli" class="col-sm-3 control-label">Tipo de Documento</label>
 					    <div class="col-sm-9">
 					      <select class="form-control" id="parentContactoSecCli" name="parentContactoSecCli">
-					      	<option th:each="p : ${parestescos}" th:value="${p.idParentContactoSecCli}" th:text="${p.descParentContactoSec}"  th:selected="${p.idParentContactoSecCli == contactosecundario.parentContactoSecCli.idParentContactoSecCli}"></option>
+					      	<option th:each="p : ${parestescos}" th:value="${p.idParentContactoSecCli}" th:text="${p.descParentContactoSec}"  th:selected="${p.idParentContactoSecCli == parentescoID}"></option>
 					      </select>
 					    </div>
 					  </div>
