@@ -10,7 +10,7 @@ import javax.persistence.Table;
 import lombok.Data;
 
 @Entity
-@Table(name="tb_parentContactoSecCli")
+@Table(name="tb_parentcontactoseccli")
 @Data
 public class ParentContactoSecCli {
 	

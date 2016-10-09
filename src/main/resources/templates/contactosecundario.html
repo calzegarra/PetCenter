@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Pet Center</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="cabecera"><img th:src="@{/image/logo-petcenter.png}" /></div>
+			</div>
+		</div>
+		<div class="row">
+			<br /><br />
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li role="presentation"><a th:href="@{/}">Bienvenidos</a></li>
+				 	<li role="presentation" class="active"><a th:href="@{/clientesmascotas}">Gestión de Clientes y Mascotas</a></li>
+				  	<li role="presentation"><a href="#">Gestión de Atención Médica</a></li>
+				  	<li role="presentation"><a href="#">Gestión de Laboratorio Clínico</a></li>
+				</ul>
+				<br />
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+				<ol class="breadcrumb">
+				  <li><a th:href="@{/clientes/}">Gestión de Clientes y Mascotas</a></li>
+				  <li class="active">Contacto Secundario</li>
+				</ol>
+				<fieldset class="well the-fieldset">
+			        <legend class="the-legend">Contacto Secundario</legend>
+			        
+			        <form class="form-horizontal" method="post" th:action="@{/clientes/contactosecundario/}" th:object="${contactosecundario}">
+			        	
+			  		<ul>
+					  <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+					</ul>
+					  
+					  <input type="hidden" class="form-control" id="cliente" name="cliente" placeholder="" th:value="${cliente.idCliente}" />
+					  
+					  <input type="hidden" class="form-control" id="idContSecundario" name="idContSecundario" placeholder="" th:value="${idContactoSecundario}" />
+			        	
+					  <div class="form-group">
+					    <label for="nomContactoSec" class="col-sm-3 control-label">Nombres</label>
+					    <div class="col-sm-9">
+					      <input type="text" th:value="${contactosecundario.nomContactoSec}" class="form-control" id="nomContactoSec" name="nomContactoSec" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="apePaternoContactoSec" class="col-sm-3 control-label">Apellido Paterno</label>
+					    <div class="col-sm-9">
+					      <input type="text" th:value="${contactosecundario.apePaternoContactoSec}" class="form-control" id="apePaternoContactoSec" name="apePaternoContactoSec" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="apeMaternoContactoSec" class="col-sm-3 control-label">Apellido Materno</label>
+					    <div class="col-sm-9">
+					      <input type="text" th:value="${contactosecundario.apeMaternoContactoSec}" class="form-control" id="apeMaternoContactoSec" name="apeMaternoContactoSec" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="parentContactoSecCli" class="col-sm-3 control-label">Tipo de Documento</label>
+					    <div class="col-sm-9">
+					      <select class="form-control" id="parentContactoSecCli" name="parentContactoSecCli">
+					      	<option th:each="p : ${parestescos}" th:value="${p.idParentContactoSecCli}" th:text="${p.descParentContactoSec}"  th:selected="${p.idParentContactoSecCli == contactosecundario.parentContactoSecCli.idParentContactoSecCli}"></option>
+					      </select>
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="celContactoSec" class="col-sm-3 control-label">Celular</label>
+					    <div class="col-sm-9">
+					      <input type="text" th:value="${contactosecundario.celContactoSec}" class="form-control" id="celContactoSec" name="celContactoSec" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="telfDomContactoSec" class="col-sm-3 control-label">Telefono del Domicilio</label>
+					    <div class="col-sm-9">
+					      <input type="text" th:value="${contactosecundario.telfDomContactoSec}" class="form-control" id="telfDomContactoSec" name="telfDomContactoSec" placeholder="" />
+					    </div>
+					  </div>
+					  <div class="form-group">
+					    <label for="descContactoSecundario" class="col-sm-3 control-label">Descripciones</label>
+					    <div class="col-sm-9">
+					      <textarea class="form-control" th:value="${contactosecundario.descContactoSecundario}" th:text="${contactosecundario.descContactoSecundario}" id="descContactoSecundario" name="descContactoSecundario"></textarea>
+					    </div>
+					  </div>
+					  
+					  <div class="form-group">
+					    <div class="col-sm-offset-3 col-sm-9">
+					      <button type="submit" class="btn btn-default">Guardar</button>
+					    </div>
+					  </div>
+					</form>
+			    </fieldset>
+			</div>
+		</div>
+		<br /><br />
+		<br /><br />
+	</div>
+	<script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+</body>
+</html>

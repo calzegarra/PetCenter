@@ -18,8 +18,8 @@
 			<br /><br />
 			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
 				<ul class="nav nav-pills nav-stacked">
-					<li role="presentation"><a href="/petcenter">Bienvenidos</a></li>
-				 	<li role="presentation" class="active"><a href="clientesmascotas">Gestión de Clientes y Mascotas</a></li>
+					<li role="presentation"><a th:href="@{/}">Bienvenidos</a></li>
+				 	<li role="presentation" class="active"><a th:href="@{/clientesmascotas}">Gestión de Clientes y Mascotas</a></li>
 				  	<li role="presentation"><a href="#">Gestión de Atención Médica</a></li>
 				  	<li role="presentation"><a href="#">Gestión de Laboratorio Clínico</a></li>
 				</ul>
@@ -27,7 +27,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
 				<ol class="breadcrumb">
-				  <li><a href="/petcenter/clientes/">Gestión de Clientes y Mascotas</a></li>
+				  <li><a th:href="@{/clientes/}">Gestión de Clientes y Mascotas</a></li>
 				  <li class="active">Crear</li>
 				</ol>
 				<fieldset class="well the-fieldset">
@@ -39,12 +39,6 @@
 					  <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
 					</ul>
 			        	
-			          <div class="form-group">
-					    <label for="codCliente" class="col-sm-3 control-label">Codigo</label>
-					    <div class="col-sm-9">
-					      <input type="text" th:value="${cliente.codCliente}" class="form-control" id="codCliente" name="codCliente" placeholder="" />
-					    </div>
-					  </div>
 					  <div class="form-group">
 					    <label for="tipoCliente" class="col-sm-3 control-label">Tipo de Cliente</label>
 					    <div class="col-sm-9">
