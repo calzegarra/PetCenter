@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.petcenter.crud.ClienteRepository;
 import com.petcenter.crud.DistritoRepository;
@@ -49,15 +51,26 @@ public class Clientes {
 	DistritoRepository distritoRep;
 	
 	@RequestMapping("/clientes")
-	public void clientesInit(Model model) {
-		clientes(1,model);
+	public void clientesInit(HttpServletRequest request, Model model, @RequestParam(value = "buscarpor", required=false, defaultValue = "0") String buscarpor) {
+		new Util().log(this.getClass(), "test :"+ buscarpor);
+		clientes(request, 1, model, buscarpor, "");
 	}
 
 	@RequestMapping("/clientes/{page}")
-	public String clientes(@PathVariable("page") int page, Model model) {
+	public String clientes(HttpServletRequest request, @PathVariable("page") int page, Model model, 
+			@RequestParam(value = "buscarpor", required = false, defaultValue = "0") String buscarpor,
+			@RequestParam(value = "codigo", required = false) String codigo) {
+		new Util().log(this.getClass(), "test 2 :"+ buscarpor);
 		model.addAttribute("tipoDocumentos", tipoDocumentosRep.findAll());
 		List<ClienteDto> clientesDto = new ArrayList<>();
-		Page<Cliente> clientes = clienteRepository.findAll(new PageRequest(page-1, 6));
+		
+		Page<Cliente> clientes = null;
+		if(buscarpor.equals("1")){
+			clientes = clienteRepository.findByCodCliente(codigo, new PageRequest(page-1, 1));
+		} else {
+			clientes = clienteRepository.findAll(new PageRequest(page-1, 6));
+		}
+		
 		for (Cliente c : clientes) {
 			ClienteDto cDto = new ClienteDto();
 			cDto.setIdCliente(c.getIdCliente());
@@ -89,7 +102,11 @@ public class Clientes {
 		}
 		
 		model.addAttribute("nextPage", nextPage);
-
+		
+		request.getSession().setAttribute("t", "fff");
+		
+		new Util().log(this.getClass(), "test 4 :"+ request.getSession().getAttribute("t"));
+		
 		return "clientes";
 	}
 

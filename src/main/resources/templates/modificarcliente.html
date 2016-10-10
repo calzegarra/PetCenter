@@ -51,15 +51,15 @@
 					    <label for="tipoCliente" class="col-sm-3 control-label">Tipo de Cliente</label>
 					    <div class="col-sm-9">
 					      <select class="form-control" id="tipoCliente" name="tipoCliente" th:selected="${clienteEnc.tipoCliente}">
-						  	<option th:each="tc : ${tipoClientes}" th:value="${tc.idTipoCliente}" th:text="${tc.descripcionTipoCliente}"></option>					      
+						  	<option th:each="tc : ${tipoClientes}" th:value="${tc.idTipoCliente}" th:text="${tc.descripcionTipoCliente}" th:selected="${tc.idTipoCliente == clienteEnc.tipoCliente.idTipoCliente}"></option>					      
 					      </select>
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="tipoDocumento" class="col-sm-3 control-label">Tipo de Documento</label>
 					    <div class="col-sm-9">
-					      <select class="form-control" id="tipoDocumento" name="tipoDocumento" th:selected="${clienteEnc.tipoCliente}">
-					      	<option th:each="td : ${tipoDocumentos}" th:value="${td.idTipoDocumento}" th:text="${td.descripcionTipoDocumento}"></option>
+					      <select class="form-control" id="tipoDocumento" name="tipoDocumento">
+					      	<option th:each="td : ${tipoDocumentos}" th:value="${td.idTipoDocumento}" th:text="${td.descripcionTipoDocumento}" th:selected="${td.idTipoDocumento == clienteEnc.tipoDocumento.idTipoDocumento}"></option>
 					      </select>
 					    </div>
 					  </div>
@@ -90,8 +90,8 @@
 					  <div class="form-group">
 					    <label for="generoCliente" class="col-sm-3 control-label">Genero</label>
 					    <div class="col-sm-9">
-					      <select class="form-control" id="generoCliente" name="generoCliente" th:selected="${clienteEnc.generoCliente}">
-					      	<option th:each="g : ${generos}" th:value="${g.idGeneroCliente}" th:text="${g.descripcionGeneroCliente}"></option>
+					      <select class="form-control" id="generoCliente" name="generoCliente">
+					      	<option th:each="g : ${generos}" th:value="${g.idGeneroCliente}" th:text="${g.descripcionGeneroCliente}" th:selected="${g.idGeneroCliente == clienteEnc.generoCliente.idGeneroCliente}"></option>
 					      </select>
 					    </div>
 					  </div>
@@ -104,16 +104,16 @@
 					  <div class="form-group">
 					    <label for="sede" class="col-sm-3 control-label">Sede</label>
 					    <div class="col-sm-9">
-					      <select class="form-control" id="sede" name="sede" th:selected="${clienteEnc.sede}">
-					      	<option th:each="s : ${sedes}" th:value="${s.idSede}" th:text="${s.descripcionSede}"></option>
+					      <select class="form-control" id="sede" name="sede">
+					      	<option th:each="s : ${sedes}" th:value="${s.idSede}" th:text="${s.descripcionSede}" th:selected="${s.idSede == clienteEnc.sede.idSede}"></option>
 					      </select>
 					    </div>
 					  </div>
 					  <div class="form-group">
 					    <label for="distrito" class="col-sm-3 control-label">Distrito</label>
 					    <div class="col-sm-9">
-					      <select class="form-control" id="distrito" name="distrito" th:selected="${clienteEnc.distrito}">
-					      	<option th:each="d : ${distritos}" th:value="${d.idDistrito}" th:text="${d.descripcionDistrito}"></option>
+					      <select class="form-control" id="distrito" name="distrito">
+					      	<option th:each="d : ${distritos}" th:value="${d.idDistrito}" th:text="${d.descripcionDistrito}" th:selected="${d.idDistrito == clienteEnc.distrito.idDistrito}"></option>
 					      </select>
 					    </div>
 					  </div>
