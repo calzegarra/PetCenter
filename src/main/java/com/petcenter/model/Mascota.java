@@ -1,6 +1,7 @@
 package com.petcenter.model;
 
 import java.util.Date;
+import java.util.concurrent.atomic.AtomicLong;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+import org.apache.commons.lang.StringUtils;
 
 import lombok.Data;
 
@@ -17,6 +21,8 @@ import lombok.Data;
 @Table(name="tb_mascota")
 @Data
 public class Mascota {
+	
+	public static final AtomicLong contador = new AtomicLong(1);
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -45,16 +51,22 @@ public class Mascota {
 	private String fotoMascota;
 	
 	@Column(name="estadomascota")
-	private int estadoMascota;
+	private boolean estadoMascota;
 	
 	@Column(name="descmascota")
 	private String descMascota;
 	
 	@ManyToOne
-	@JoinColumn(name="generomascota", insertable=true, updatable=true)
+	@JoinColumn(name="idgeneromascota", insertable=true, updatable=true)
 	private GeneroMascota generoMascota;
 	
 	@Column(name="fechanacmascota")
 	private Date fechaNacMascota;
+	
+	@PrePersist
+	public void onPrePersist() {
+		// con esto se genera el codigo automaticamente
+		this.codMascota = "MAS" + StringUtils.leftPad(String.valueOf(contador.getAndIncrement()), 7, '0');
+	}
 
 }

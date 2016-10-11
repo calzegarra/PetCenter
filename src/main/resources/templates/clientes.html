@@ -27,7 +27,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
 				<ol class="breadcrumb">
-				  <li><a href="clientesmascotas">Gestión de Clientes y Mascotas</a></li>
+				  <li><a th:href="@{'/clientesmascotas'}">Gestión de Clientes y Mascotas</a></li>
 				  <li class="active">Clientes</li>
 				</ol>
 				<fieldset class="well the-fieldset">
@@ -127,55 +127,75 @@
 					  Agregar Cliente
 					</a>
 					<br/><br/>
-					<table class="table">
-						<thead>
-							<th>Codigo</th>
-							<th>Tipo Cliente</th>
-							<th>Documento</th>
-							<th>Nombre Completo</th>
-							<th>Editar</th>
-							<th>Contacto Secundario</th>
-						</thead>
-						<tbody>
-							<tr th:each="c : ${clientes}">
-								<td th:text="${c.codCliente}"></td>
-								<td th:text="${c.tipoCliente}"></td>
-								<td th:text="${c.documento}"></td>
-								<td th:text="${c.nombreCompleto}"></td>
-								<td>
-									<div class="content_center">
-										<a type="button" class="btn btn-default" aria-label="Left Align" th:href="@{'/clientes/modificar/'+${c.idCliente}}">
-										  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-										</a>
-									</div>
-								</td>
-								<td>
-									<div class="content_center">
-										<a type="button" class="btn btn-default" aria-label="Left Align" th:href="@{'/clientes/contactosecundario/'+${c.idCliente}}">
-										  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
-										</a>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="content_center">
-						<nav aria-label="Page navigation">
-						  <ul class="pagination">
-						    <li>
-						      <a th:href="@{'/clientes/'+${previusPage}}" aria-label="Previous">
-						        <span aria-hidden="true">&laquo;</span>
-						      </a>
-						    </li>
-						    <li th:each="i : ${#numbers.sequence(1, totalPages)}"><a th:href="@{'/clientes/'+${i}}" th:text="${i}"></a></li>
-						    <li>
-						      <a th:href="@{'/clientes/'+${nextPage}}" aria-label="Next">
-						        <span aria-hidden="true">&raquo;</span>
-						      </a>
-						    </li>
-						  </ul>
-						</nav>
+					<div th:if="${existaData}">
+						<table class="table">
+							<thead>
+								<th>Codigo</th>
+								<th>Tipo Cliente</th>
+								<th>Documento</th>
+								<th>Nombre Completo</th>
+								<th>Editar</th>
+								<th>Contacto Secundario</th>
+							</thead>
+							<tbody>
+								<tr th:each="c : ${clientes}">
+									<td th:text="${c.codCliente}"></td>
+									<td th:text="${c.tipoCliente}"></td>
+									<td th:text="${c.documento}"></td>
+									<td th:text="${c.nombreCompleto}"></td>
+									<td>
+										<div class="content_center">
+											<a type="button" class="btn btn-default" aria-label="Left Align" th:href="@{'/clientes/modificar/'+${c.idCliente}}">
+											  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+											</a>
+										</div>
+									</td>
+									<td>
+										<div class="content_center">
+											<a type="button" class="btn btn-default" aria-label="Left Align" th:href="@{'/clientes/contactosecundario/'+${c.idCliente}}">
+											  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+											</a>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="content_center">
+							<nav aria-label="Page navigation">
+							  <ul class="pagination">
+							    <li>
+							      <a th:href="@{'/clientes/'+${previusPage}}" aria-label="Previous">
+							        <span aria-hidden="true">&laquo;</span>
+							      </a>
+							    </li>
+							    <li th:each="i : ${#numbers.sequence(1, totalPages)}"><a th:href="@{'/clientes/'+${i}}" th:text="${i}"></a></li>
+							    <li>
+							      <a th:href="@{'/clientes/'+${nextPage}}" aria-label="Next">
+							        <span aria-hidden="true">&raquo;</span>
+							      </a>
+							    </li>
+							  </ul>
+							</nav>
+						</div>
 					</div>
+					<div th:unless="${existaData}">
+						<table class="table">
+							<thead>
+								<th>Codigo</th>
+								<th>Tipo Cliente</th>
+								<th>Documento</th>
+								<th>Nombre Completo</th>
+								<th>Editar</th>
+								<th>Contacto Secundario</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="content_center" colspan="6">No hay datos</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					
 			    </fieldset>
 			</div>
 		</div>

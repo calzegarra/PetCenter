@@ -27,7 +27,7 @@
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
 				<ol class="breadcrumb">
-				  <li><a th:href="@{/clientes/}">Gestión de Clientes y Mascotas</a></li>
+				  <li><a th:href="@{/clientes/}">Clientes</a></li>
 				  <li class="active">Contacto Secundario</li>
 				</ol>
 				<fieldset class="well the-fieldset">
@@ -35,9 +35,13 @@
 			        
 			        <form class="form-horizontal" method="post" th:action="@{/clientes/contactosecundario/}" th:object="${contactosecundario}">
 			        	
-			  		<ul>
-					  <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
-					</ul>
+			  		<div class="alert alert-success" role="alert">
+			        
+				  		<ul>
+						  <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+						</ul>
+					
+					</div>
 					  
 					  <input type="hidden" class="form-control" id="cliente" name="cliente" placeholder="" th:value="${cliente.idCliente}" />
 					  

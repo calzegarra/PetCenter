@@ -127,4 +127,8 @@ public class Cliente {
 		this.codCliente = "CLI" + StringUtils.leftPad(String.valueOf(contador.getAndIncrement()), 7, '0');
 	}
 	
+	public String datosCliente(){
+		return this.nroDocumento + " - " + this.apePaternoCliente + " " + this.apeMaternoCliente + ", " + this.nomCliente;
+	}
+	
 }
