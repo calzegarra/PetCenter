@@ -35,11 +35,15 @@
 			        
 			        <form class="form-horizontal" method="post" th:action="@{/clientes/actualizar}" th:object="${cliente}">
 			        
-			        <div class="alert alert-success" role="alert">
-			        
-				  		<ul>
-						  <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
-						</ul>
+			        <div th:if="${#fields.hasErrors()}">
+			       	
+				        <div class="alert alert-danger" role="alert">
+				        
+					  		<ul>
+							  <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+							</ul>
+						
+						</div>
 					
 					</div>
 					

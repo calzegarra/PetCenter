@@ -1,5 +1,6 @@
 package com.petcenter.controller;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,43 +31,49 @@ public class ContactosSecundarios {
 	ParentContactoSecCliRepository parentescoContactoRep;
 	
 	@RequestMapping("/clientes/contactosecundario/{id}")
-	public String contactosecundario(@PathVariable("id") long id, Model model) {
+	public String contactosecundario(HttpSession session, @PathVariable("id") long id, Model model) {
 		Cliente cliente = clienteRepository.findByIdCliente(id);
+		
+		session.setAttribute("idCliente", cliente.getIdCliente());
+		
 		model.addAttribute("cliente", cliente);
 		if(contactoSecundarioRep.findByCliente(cliente) != null){
 			ContactoSecundario contactoSecundario = contactoSecundarioRep.findByCliente(cliente);
 			model.addAttribute("contactosecundario", contactoSecundario);
-			model.addAttribute("idContactoSecundario", ""+contactoSecundario.getIdContactoSecundario());
+			session.setAttribute("idContactoSecundario", contactoSecundario.getIdContactoSecundario());
 			model.addAttribute("parentescoID", contactoSecundario.getParentContactoSecCli().getIdParentContactoSecCli());
 		} else {
 			model.addAttribute("contactosecundario", new ContactoSecundario());
 			model.addAttribute("parentescoID", "");
-			model.addAttribute("idContactoSecundario", "");
+			session.setAttribute("idContactoSecundario", "");
 		}
+		
 		model.addAttribute("parestescos",parentescoContactoRep.findAll());
+		
 		return "contactosecundario";
 	}
 	
-	@RequestMapping(value = "/clientes/contactosecundario/", method = { RequestMethod.POST })
-	public String guardar(Model model, @RequestParam("idContSecundario") String id, @Valid ContactoSecundario contactoSecundario, BindingResult bindingResult) {
+	@RequestMapping(value = "/clientes/contactosecundario", method = { RequestMethod.POST })
+	public String guardar(Model model, @RequestParam("idContSecundario") String id, @Valid ContactoSecundario contactosecundario, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()){
-			model.addAttribute("contactosecundario", contactoSecundario);
+			model.addAttribute("contactosecundario", contactosecundario);
+			model.addAttribute("idContactoSecundario", ""+contactosecundario.getIdContactoSecundario());
 			model.addAttribute("parestescos",parentescoContactoRep.findAll());
 			return "contactosecundario";
 		} else {
 			if(!id.equals("")){
 				ContactoSecundario contactoSecundarioEcontrado = contactoSecundarioRep.findByIdContactoSecundario(Long.valueOf(id));
-				contactoSecundarioEcontrado.setNomContactoSec(contactoSecundario.getNomContactoSec());
-				contactoSecundarioEcontrado.setApePaternoContactoSec(contactoSecundario.getApePaternoContactoSec());
-				contactoSecundarioEcontrado.setApePaternoContactoSec(contactoSecundario.getApeMaternoContactoSec());
-				contactoSecundarioEcontrado.setParentContactoSecCli(contactoSecundario.getParentContactoSecCli());
-				contactoSecundarioEcontrado.setCelContactoSec(contactoSecundario.getCelContactoSec());
-				contactoSecundarioEcontrado.setTelfDomContactoSec(contactoSecundario.getTelfDomContactoSec());
-				contactoSecundarioEcontrado.setDescContactoSecundario(contactoSecundario.getDescContactoSecundario());
+				contactoSecundarioEcontrado.setNomContactoSec(contactosecundario.getNomContactoSec());
+				contactoSecundarioEcontrado.setApePaternoContactoSec(contactosecundario.getApePaternoContactoSec());
+				contactoSecundarioEcontrado.setApePaternoContactoSec(contactosecundario.getApeMaternoContactoSec());
+				contactoSecundarioEcontrado.setParentContactoSecCli(contactosecundario.getParentContactoSecCli());
+				contactoSecundarioEcontrado.setCelContactoSec(contactosecundario.getCelContactoSec());
+				contactoSecundarioEcontrado.setTelfDomContactoSec(contactosecundario.getTelfDomContactoSec());
+				contactoSecundarioEcontrado.setDescContactoSecundario(contactosecundario.getDescContactoSecundario());
 				contactoSecundarioRep.save(contactoSecundarioEcontrado);
 				return "redirect:/clientes";
 			} else {
-				contactoSecundarioRep.save(contactoSecundario);
+				contactoSecundarioRep.save(contactosecundario);
 				return "redirect:/clientes";
 			}
 		}

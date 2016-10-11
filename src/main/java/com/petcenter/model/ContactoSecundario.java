@@ -19,6 +19,8 @@ import lombok.Data;
 @Data
 public class ContactoSecundario {
 	
+	public ContactoSecundario(){}
+	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="idcontactosecundario")
