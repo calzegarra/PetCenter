@@ -62,40 +62,54 @@ public class Mascotas {
 		
 		List<MascotaDto> mascotasDto = new ArrayList<>();
 		
-		for(Mascota m : mascotas) {
-			MascotaDto mascotaDto = new MascotaDto();
-			mascotaDto.setIdMascota(m.getIdMascota());
-			mascotaDto.setCodigo(m.getCodMascota());
-			mascotaDto.setRaza(m.getRaza().getEspecie().getDescripcionEspecie()+" - "+m.getRaza().getDescripcionRaza());
-			mascotaDto.setEstado(m.isEstadoMascota());
-			mascotaDto.setDueno(m.getCliente().getApePaternoCliente() + " " + m.getCliente().getApeMaternoCliente() + ", " + m.getCliente().getNomCliente());
-			mascotaDto.setRelacionConMascota(m.getRelClienteMascota().getDescripcionRelClienteMascota());
-			mascotasDto.add(mascotaDto);
-		}
+		boolean existaData = false;
 		
-		model.addAttribute("mascotas", mascotasDto);
-		
-		model.addAttribute("totalPages", mascotas.getTotalPages());
-		
-		String previusPage = "";
-		
-		if(mascotas.previousPageable() != null){
-			previusPage = String.valueOf(mascotas.previousPageable().getPageNumber()+1);
+		if(mascotas.getTotalPages() != 0){
+			
+			existaData = true;
+			
+			for(Mascota m : mascotas) {
+				MascotaDto mascotaDto = new MascotaDto();
+				mascotaDto.setIdMascota(m.getIdMascota());
+				mascotaDto.setCodigo(m.getCodMascota());
+				mascotaDto.setRaza(m.getRaza().getEspecie().getDescripcionEspecie()+" - "+m.getRaza().getDescripcionRaza());
+				mascotaDto.setEstado(m.isEstadoMascota());
+				mascotaDto.setDueno(m.getCliente().getApePaternoCliente() + " " + m.getCliente().getApeMaternoCliente() + ", " + m.getCliente().getNomCliente());
+				mascotaDto.setRelacionConMascota(m.getRelClienteMascota().getDescripcionRelClienteMascota());
+				mascotasDto.add(mascotaDto);
+			}
+			
+			model.addAttribute("mascotas", mascotasDto);
+			
+			model.addAttribute("totalPages", mascotas.getTotalPages());
+			
+			String previusPage = "";
+			
+			if(mascotas.previousPageable() != null){
+				previusPage = String.valueOf(mascotas.previousPageable().getPageNumber()+1);
+			} else {
+				previusPage = "1";
+			}
+			
+			model.addAttribute("previusPage", previusPage);
+			
+			String nextPage = "";
+			
+			if(mascotas.nextPageable() != null) {
+				nextPage = String.valueOf(mascotas.nextPageable().getPageNumber()+1);
+			} else {
+				nextPage = String.valueOf(mascotas.getTotalPages());
+			}
+			
+			model.addAttribute("nextPage", nextPage);
+			
 		} else {
-			previusPage = "1";
+			
+			model.addAttribute("totalPages", 1);
+			
 		}
 		
-		model.addAttribute("previusPage", previusPage);
-		
-		String nextPage = "";
-		
-		if(mascotas.nextPageable() != null) {
-			nextPage = String.valueOf(mascotas.nextPageable().getPageNumber()+1);
-		} else {
-			nextPage = String.valueOf(mascotas.getTotalPages());
-		}
-		
-		model.addAttribute("nextPage", nextPage);
+		model.addAttribute("existaData", existaData);
 		
 		return "mascotas";
 		

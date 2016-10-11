@@ -159,48 +159,67 @@
 					  Agregar Mascota
 					</a>
 					<br/><br/>
-					<table class="table">
-						<thead>
-							<th>Codigo</th>
-							<th>Especie - Raza</th>
-							<th>Estado</th>
-							<th>Dueño</th>
-							<th>Relación</th>
-							<th>Editar</th>
-						</thead>
-						<tbody>
-							<tr th:each="m : ${mascotas}">
-								<td th:text="${m.codigo}"></td>
-								<td th:text="${m.raza}"></td>
-								<td th:text="${m.estado == true}? Activo : Inactivo"></td>
-								<td th:text="${m.dueno}"></td>
-								<td th:text="${m.relacionConMascota}"></td>
-								<td>
-									<div class="content_center">
-										<a type="button" class="btn btn-default" aria-label="Left Align" th:href="@{'/mascotas/modificar/'+${m.idMascota}}">
-										  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-										</a>
-									</div>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-					<div class="content_center">
-						<nav aria-label="Page navigation">
-						  <ul class="pagination">
-						    <li>
-						      <a th:href="@{'/mascotas/'+${previusPage}}" aria-label="Previous">
-						        <span aria-hidden="true">&laquo;</span>
-						      </a>
-						    </li>
-						    <li th:each="i : ${#numbers.sequence(1, totalPages)}"><a th:href="@{'/mascotas/'+${i}}" th:text="${i}"></a></li>
-						    <li>
-						      <a th:href="@{'/mascotas/'+${nextPage}}" aria-label="Next">
-						        <span aria-hidden="true">&raquo;</span>
-						      </a>
-						    </li>
-						  </ul>
-						</nav>
+					<div th:if="${existaData}">
+						<table class="table">
+							<thead>
+								<th>Codigo</th>
+								<th>Especie - Raza</th>
+								<th>Estado</th>
+								<th>Dueño</th>
+								<th>Relación</th>
+								<th>Editar</th>
+							</thead>
+							<tbody>
+								<tr th:each="m : ${mascotas}">
+									<td th:text="${m.codigo}"></td>
+									<td th:text="${m.raza}"></td>
+									<td th:text="${m.estado == true}? Activo : Inactivo"></td>
+									<td th:text="${m.dueno}"></td>
+									<td th:text="${m.relacionConMascota}"></td>
+									<td>
+										<div class="content_center">
+											<a type="button" class="btn btn-default" aria-label="Left Align" th:href="@{'/mascotas/modificar/'+${m.idMascota}}">
+											  <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+											</a>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<div class="content_center">
+							<nav aria-label="Page navigation">
+							  <ul class="pagination">
+							    <li>
+							      <a th:href="@{'/mascotas/'+${previusPage}}" aria-label="Previous">
+							        <span aria-hidden="true">&laquo;</span>
+							      </a>
+							    </li>
+							    <li th:each="i : ${#numbers.sequence(1, totalPages)}"><a th:href="@{'/mascotas/'+${i}}" th:text="${i}"></a></li>
+							    <li>
+							      <a th:href="@{'/mascotas/'+${nextPage}}" aria-label="Next">
+							        <span aria-hidden="true">&raquo;</span>
+							      </a>
+							    </li>
+							  </ul>
+							</nav>
+						</div>
+					</div>
+					<div th:unless="${existaData}">
+						<table class="table">
+							<thead>
+								<th>Codigo</th>
+								<th>Especie - Raza</th>
+								<th>Estado</th>
+								<th>Dueño</th>
+								<th>Relación</th>
+								<th>Editar</th>
+							</thead>
+							<tbody>
+								<tr>
+									<td class="content_center" colspan="6">No hay datos</td>
+								</tr>
+							</tbody>
+						</table>
 					</div>
 			    </fieldset>
 			</div>
