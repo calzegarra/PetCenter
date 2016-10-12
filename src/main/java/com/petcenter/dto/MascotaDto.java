@@ -9,7 +9,7 @@ public class MascotaDto {
 	
 	private String codigo;
 	
-	private String raza;
+	private String mascota;
 	
 	private boolean estado;
 	

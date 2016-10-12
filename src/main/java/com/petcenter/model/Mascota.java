@@ -48,7 +48,7 @@ public class Mascota {
 	private Raza raza;
 	
 	@Column(name="fotomascota")
-	private String fotoMascota;
+	private byte[] fotoMascota;
 	
 	@Column(name="estadomascota")
 	private boolean estadoMascota;

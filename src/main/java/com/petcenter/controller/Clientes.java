@@ -56,13 +56,12 @@ public class Clientes {
 	public void clientesInit(HttpServletRequest request, Model model,
 			@RequestParam(value = "buscarpor", required = false, defaultValue = "0") String buscarpor, @Valid ClienteBusquedaDto clientebusqueda, 
 			BindingResult bindingResult) {
-		clientes(request, 1, model, buscarpor, "", clientebusqueda, bindingResult);
+		clientes(request, 1, model, buscarpor, clientebusqueda, bindingResult);
 	}
 
 	@RequestMapping("/clientes/{page}")
 	public String clientes(HttpServletRequest request, @PathVariable("page") int page, Model model,
 			@RequestParam(value = "buscarpor", required = false, defaultValue = "0") String buscarpor,
-			@RequestParam(value = "codigo", required = false) String codigo, 
 			@Valid @ModelAttribute("clientebusqueda") ClienteBusquedaDto clientebusqueda, BindingResult bindingResult) {
 		
 		model.addAttribute("clientebusqueda", clientebusqueda);
@@ -74,14 +73,14 @@ public class Clientes {
 		Page<Cliente> clientes = null;
 		if (buscarpor.equals("1")) {
 			
-			if (codigo.isEmpty()) {
+			if (clientebusqueda.getCodigo().isEmpty()) {
 				ObjectError error = new ObjectError("codigo", "Debe ingresar el codigo");
 				bindingResult.addError(error);
 			}
 			if (bindingResult.hasErrors()) {
 				return "clientes";
 			} else {
-				clientes = clienteRepository.findByCodCliente(codigo.trim(), new PageRequest(page - 1, 1));
+				clientes = clienteRepository.findByCodCliente(clientebusqueda.getCodigo().trim(), new PageRequest(page - 1, 1));
 			}
 			
 		} else if (buscarpor.equals("2")) {

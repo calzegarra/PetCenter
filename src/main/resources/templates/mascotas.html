@@ -32,7 +32,21 @@
 				</ol>
 				<fieldset class="well the-fieldset">
 			        <legend class="the-legend">Datos de la Mascota</legend>
-			        <form class="form-horizontal">
+			        
+			        <form class="form-horizontal" method="get" th:action="@{/mascotas/1}" th:object="${mascotabusqueda}">
+			        
+			        	<div th:if="${#fields.hasErrors()}">
+			       	
+					        <div class="alert alert-danger" role="alert">
+					        
+						  		<ul>
+								  <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+								</ul>
+							
+							</div>
+						
+						</div>
+			        	
 			        	<div class="row">
 			        		<div class="col-sm-6">
 			        			<div class="form-group">
@@ -41,7 +55,7 @@
 								    	<select id="buscarpor" name="buscarpor" class="form-control">
 								    		<option value="0">-- Todos --</option>
 								    		<option value="1">Codigo de la Mascota</option>
-								    		<option value="2">Nombres de la Mascota</option>
+								    		<option value="2">Nombre de la Mascota</option>
 								    		<option value="3">Número de Documento</option>
 								    		<option value="4">Datos del Cliente</option>
 								    	</select>
@@ -62,7 +76,7 @@
 			        			<div class="form-group">
 								    <label for="inputEmail3" class="col-sm-5 control-label">Codigo:</label>
 								    <div class="col-sm-7">
-								    	<input type="text" class="form-control" id="inputEmail3" placeholder="" />
+								    	<input type="text" class="form-control comascota" id="codigo" name="codigo" placeholder="" />
 								    </div>
 								</div>
 			        		</div>
@@ -70,7 +84,7 @@
 			        			<div class="form-group">
 								    <label for="inputEmail3" class="col-sm-5 control-label">Nombre:</label>
 								    <div class="col-sm-7">
-								      	<input type="text" class="form-control" id="inputEmail3" placeholder="" />
+								      	<input type="text" class="form-control nomascota" id="nombre" name="nombre" placeholder="" />
 								    </div>
 								</div>
 			        		</div>
@@ -83,18 +97,12 @@
 			        	</div>
 			        	<div class="row">
 			        		<div class="col-sm-6">
-			        			<div class="form-group">
-								    <label for="inputEmail3" class="col-sm-5 control-label">Codigo:</label>
-								    <div class="col-sm-7">
-								    	<input type="text" class="form-control" id="inputEmail3" placeholder="" />
-								    </div>
-								</div>
 			        		</div>
 			        		<div class="col-sm-6">
 			        			<div class="form-group">
 								    <label for="inputEmail3" class="col-sm-5 control-label">Nombre:</label>
 								    <div class="col-sm-7">
-								      <input type="text" class="form-control" id="inputEmail3" placeholder="" />
+								      <input type="text" class="form-control daclientes" id="nombreCliente" name="nombreCliente" placeholder="" />
 								    </div>
 								</div>
 			        		</div>
@@ -104,7 +112,7 @@
 			        			<div class="form-group">
 								    <label for="inputEmail3" class="col-sm-5 control-label">Tipo de Documento:</label>
 								    <div class="col-sm-7">
-								    	<select class="form-control">
+								    	<select class="form-control bdocumento" id="tipoDocumento" name="tipoDocumento">
 								    		<option th:each="td : ${tipoDocumentos}" th:value="${td.idTipoDocumento}" th:text="${td.descripcionTipoDocumento}"></option>
 								    	</select>
 								    </div>
@@ -114,7 +122,7 @@
 			        			<div class="form-group">
 								    <label for="inputEmail3" class="col-sm-5 control-label">Apellido Paterno:</label>
 								    <div class="col-sm-7">
-								      <input type="text" class="form-control" id="inputEmail3" placeholder="" />
+								      <input type="text" class="form-control daclientes" id="apPaterno" name="apPaterno" placeholder="" />
 								    </div>
 								</div>
 			        		</div>
@@ -124,7 +132,7 @@
 			        			<div class="form-group">
 								    <label for="inputEmail3" class="col-sm-5 control-label">Nº del Documento:</label>
 								    <div class="col-sm-7">
-								    	<input type="text" class="form-control" id="inputEmail3" placeholder="" />
+								    	<input type="text" class="form-control bdocumento" id="nrDocumento" name="nroDocumento" placeholder="" />
 								    </div>
 								</div>
 			        		</div>
@@ -132,7 +140,7 @@
 			        			<div class="form-group">
 								    <label for="inputEmail3" class="col-sm-5 control-label">Apellido Materno:</label>
 								    <div class="col-sm-7">
-								      <input type="text" class="form-control" id="inputEmail3" placeholder="" />
+								      <input type="text" class="form-control daclientes" id="apMaterno" name="apMaterno" placeholder="" />
 								    </div>
 								</div>
 			        		</div>
@@ -142,7 +150,7 @@
 			        			<div class="form-group">
 								    <label for="inputEmail3" class="col-sm-5 control-label"></label>
 								    <div class="col-sm-7">
-								    	<button type="button" class="btn btn-default" aria-label="Left Align">
+								    	<button type="submit" class="btn btn-default" aria-label="Left Align">
 										  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
 										  Buscar Mascota
 										</button>
@@ -163,7 +171,7 @@
 						<table class="table">
 							<thead>
 								<th>Codigo</th>
-								<th>Especie - Raza</th>
+								<th>Mascota</th>
 								<th>Estado</th>
 								<th>Dueño</th>
 								<th>Relación</th>
@@ -172,7 +180,7 @@
 							<tbody>
 								<tr th:each="m : ${mascotas}">
 									<td th:text="${m.codigo}"></td>
-									<td th:text="${m.raza}"></td>
+									<td th:text="${m.mascota}"></td>
 									<td th:text="${m.estado == true}? Activo : Inactivo"></td>
 									<td th:text="${m.dueno}"></td>
 									<td th:text="${m.relacionConMascota}"></td>
@@ -208,7 +216,7 @@
 						<table class="table">
 							<thead>
 								<th>Codigo</th>
-								<th>Especie - Raza</th>
+								<th>Mascota</th>
 								<th>Estado</th>
 								<th>Dueño</th>
 								<th>Relación</th>
@@ -229,5 +237,28 @@
 	</div>
 	<script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
 	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+	<script type="text/javascript">
+	$(document).ready(function(){
+		$(".comascota, .nomascota, .bdocumento, .daclientes").attr("disabled","disabled");
+		$("#buscarpor").change(function(){
+			var opcion = $(this).val();
+			if(opcion === "1"){
+				$(".nomascota, .bdocumento, .daclientes").attr("disabled","disabled");
+				$(".comascota").removeAttr("disabled");
+			} else if (opcion === "2"){
+				$(".comascota, .bdocumento, .daclientes").attr("disabled","disabled");
+				$(".nomascota").removeAttr("disabled");
+			} else if (opcion === "3"){
+				$(".comascota, .nomascota, .daclientes").attr("disabled","disabled");
+				$(".bdocumento").removeAttr("disabled");
+			} else if (opcion === "4") {
+				$(".comascota, .nomascota, .bdocumento").attr("disabled","disabled");
+				$(".daclientes").removeAttr("disabled");
+			} else {
+				$(".comascota, .nomascota, .bdocumento, .daclientes").attr("disabled","disabled");
+			}
+		});
+	});
+	</script>
 </body>
 </html>

@@ -1,18 +1,25 @@
 package com.petcenter.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.petcenter.crud.ClienteRepository;
 import com.petcenter.crud.EspecieRepository;
@@ -21,9 +28,9 @@ import com.petcenter.crud.MascotaRepository;
 import com.petcenter.crud.RazaRepository;
 import com.petcenter.crud.RelClienteMascotaRepository;
 import com.petcenter.crud.TipoDocumentoRepository;
+import com.petcenter.dto.MascotaBusquedaDto;
 import com.petcenter.dto.MascotaDto;
 import com.petcenter.model.Mascota;
-import com.petcenter.util.Util;
 
 @Controller
 public class Mascotas {
@@ -50,19 +57,52 @@ public class Mascotas {
 	EspecieRepository especieRep;
 	
 	@RequestMapping("/mascotas")
-	public void mascotasInit(HttpServletRequest request, Model model, @RequestParam(value = "buscarpor", required=false, defaultValue = "0") String buscarpor) {
-		new Util().log(this.getClass(), "test :"+ buscarpor);
-		mascotas(request, 1, model, buscarpor, "");
+	public void mascotasInit(HttpServletRequest request, Model model, 
+			@RequestParam(value = "buscarpor", required=false, defaultValue = "0") String buscarpor,
+			@Valid @ModelAttribute("mascotabusqueda") MascotaBusquedaDto mascotabusqueda, BindingResult bindingResult) {
+		mascotas(request, 1, model, buscarpor, mascotabusqueda, bindingResult);
 	}
 	
 	@RequestMapping("/mascotas/{page}")
 	public String mascotas(HttpServletRequest request, @PathVariable("page") int page, Model model,
 			@RequestParam(value = "buscarpor", required=false, defaultValue = "0") String buscarpor, 
-			String nroDocumento) {
+			@Valid @ModelAttribute("mascotabusqueda") MascotaBusquedaDto mascotabusqueda, BindingResult bindingResult) {
+		
+		model.addAttribute("mascotabusqueda", mascotabusqueda);
 		
 		model.addAttribute("tipoDocumentos", tipoDocumentos.findAll());
 		
-		Page<Mascota> mascotas = mascotaRep.findAll(new PageRequest(page - 1, 6));
+		Page<Mascota> mascotas = null;
+		
+		if(buscarpor.equals("1")){
+			
+			if (mascotabusqueda.getCodigo().isEmpty()) {
+				ObjectError error = new ObjectError("codigo", "Debe ingresar el Codigo");
+				bindingResult.addError(error);
+			}
+			if (bindingResult.hasErrors()) {
+				return "mascotas";
+			} else {
+				mascotas = mascotaRep.findByCodMascota(mascotabusqueda.getCodigo().trim(), new PageRequest(page - 1, 6));
+			}
+			
+		} else if (buscarpor.equals("2")){
+			
+			if (mascotabusqueda.getNombre().isEmpty()) {
+				ObjectError error = new ObjectError("nombre", "Debe ingresar el Nombre");
+				bindingResult.addError(error);
+			}
+			if (bindingResult.hasErrors()) {
+				return "mascotas";
+			} else {
+				mascotas = mascotaRep.findByNomMascota(mascotabusqueda.getNombre().trim(), new PageRequest(page - 1, 6));
+			}
+			
+		} else {
+			
+			mascotas = mascotaRep.findAll(new PageRequest(page - 1, 6));
+			
+		}
 		
 		List<MascotaDto> mascotasDto = new ArrayList<>();
 		
@@ -76,7 +116,7 @@ public class Mascotas {
 				MascotaDto mascotaDto = new MascotaDto();
 				mascotaDto.setIdMascota(m.getIdMascota());
 				mascotaDto.setCodigo(m.getCodMascota());
-				mascotaDto.setRaza(m.getRaza().getEspecie().getDescripcionEspecie()+" - "+m.getRaza().getDescripcionRaza());
+				mascotaDto.setMascota(m.getNomMascota() + " (" + m.getRaza().getEspecie().getDescripcionEspecie()+" - "+m.getRaza().getDescripcionRaza() + " )");
 				mascotaDto.setEstado(m.isEstadoMascota());
 				mascotaDto.setDueno(m.getCliente().getApePaternoCliente() + " " + m.getCliente().getApeMaternoCliente() + ", " + m.getCliente().getNomCliente());
 				mascotaDto.setRelacionConMascota(m.getRelClienteMascota().getDescripcionRelClienteMascota());
@@ -127,6 +167,17 @@ public class Mascotas {
 		model.addAttribute("generos", generoMascotaRep.findAll());
 		model.addAttribute("relacionclientes", relCLienteMascotaRep.findAll());
 		return "crearmascota";
+	}
+	
+	@RequestMapping(value = "/mascotas/guardar", method = { RequestMethod.POST })
+	public String guardarmascota(@RequestParam("file") MultipartFile file, Model model, @Valid Mascota mascota, BindingResult bindingResult) throws IOException {
+		if (bindingResult.hasErrors()) {
+			return "crearmascota";
+		} else {
+			mascota.setFotoMascota(file.getBytes());
+			mascotaRep.save(mascota);
+			return "redirect:/mascotas";
+		}
 	}
 	
 }

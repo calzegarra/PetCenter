@@ -10,4 +10,8 @@ public interface MascotaRepository extends CrudRepository<Mascota, Long> {
 	
 	Page<Mascota> findAll(Pageable pegeable);
 	
+	Page<Mascota> findByCodMascota(String codigoMascota, Pageable pegeable);
+	
+	Page<Mascota> findByNomMascota(String nombreMascota, Pageable pegeable);
+	
 }
