@@ -97,6 +97,39 @@ public class Mascotas {
 			} else {
 				mascotas = mascotaRep.findByNomMascota(mascotabusqueda.getNombre().trim(), new PageRequest(page - 1, 6));
 			}
+		
+		} else if (buscarpor.equals("3")){
+			
+			if (mascotabusqueda.getNroDocumento().isEmpty()) {
+				ObjectError error = new ObjectError("nroDocumento", "Debe ingresar el Nro de Documento");
+				bindingResult.addError(error);
+			}
+			if (bindingResult.hasErrors()) {
+				return "mascotas";
+			} else {
+				mascotas = mascotaRep.findByTipoDocunento(mascotabusqueda.getTipoDocumento(), mascotabusqueda.getNroDocumento().trim(), new PageRequest(page - 1, 6));
+			}
+		
+		} else if (buscarpor.equals("4")){
+			
+			if (mascotabusqueda.getNombreCliente().isEmpty()) {
+				ObjectError error = new ObjectError("nombreCliente", "Debe ingresar el Nombre del Cliente");
+				bindingResult.addError(error);
+			}
+			if (mascotabusqueda.getApPaterno().isEmpty()) {
+				ObjectError error = new ObjectError("apPaterno", "Debe ingresar el Apellido Paterno del Cliente");
+				bindingResult.addError(error);
+			}
+			if (mascotabusqueda.getApMaterno().isEmpty()) {
+				ObjectError error = new ObjectError("nombreCliente", "Debe ingresar el Apellido Materno del Cliente");
+				bindingResult.addError(error);
+			}
+			if (bindingResult.hasErrors()) {
+				return "mascotas";
+			} else {
+				mascotas = mascotaRep.findByNombreCompletoCliente(mascotabusqueda.getNombreCliente().trim(), 
+						mascotabusqueda.getApPaterno().trim(), mascotabusqueda.getApMaterno().trim(), new PageRequest(page - 1, 6));
+			}
 			
 		} else {
 			
