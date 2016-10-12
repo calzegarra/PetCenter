@@ -2,6 +2,7 @@ package com.petcenter.crud;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.petcenter.model.Cliente;
@@ -20,5 +21,8 @@ public interface ClienteRepository extends CrudRepository<Cliente, Long> {
 				   String apeMaternoCliente, Pageable pageable);
 	
 	Cliente findByNroDocumento(String nroDocumento);
+	
+	@Query("select count(c.idCliente) FROM Cliente c")
+	int countRows();
 	
 }

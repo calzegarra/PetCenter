@@ -1,7 +1,6 @@
 package com.petcenter.model;
 
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicLong;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,10 +9,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
-import org.apache.commons.lang.StringUtils;
+import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import lombok.Data;
 
@@ -21,8 +21,6 @@ import lombok.Data;
 @Table(name="tb_mascota")
 @Data
 public class Mascota {
-	
-	public static final AtomicLong contador = new AtomicLong(1);
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -37,36 +35,39 @@ public class Mascota {
 	
 	@ManyToOne
 	@JoinColumn(name="idcliente", insertable=true, updatable=true)
+	@NotNull(message="Debe informar Cliente")
 	private Cliente cliente;
 	
 	@ManyToOne
 	@JoinColumn(name="idrelclientemascota", insertable=true, updatable=true)
+	@NotNull(message="Debe informar Relación con la Mascota")
 	private RelClienteMascota relClienteMascota;
 	
 	@ManyToOne
 	@JoinColumn(name="idraza", insertable=true, updatable=true)
+	@NotNull(message="Debe informar Raza")
 	private Raza raza;
 	
 	@Column(name="fotomascota")
+	@NotNull(message="Debe informar Foto")
 	private byte[] fotoMascota;
 	
 	@Column(name="estadomascota")
 	private boolean estadoMascota;
 	
 	@Column(name="descmascota")
+	@NotNull(message="Debe informar Descripción")
+	@NotBlank(message="Debe informar Descripción")
 	private String descMascota;
 	
 	@ManyToOne
 	@JoinColumn(name="idgeneromascota", insertable=true, updatable=true)
+	@NotNull(message="Debe informar Genero")
 	private GeneroMascota generoMascota;
 	
 	@Column(name="fechanacmascota")
+	@NotNull(message="Debe informar Fecha Nacimiento")
+	@DateTimeFormat(pattern="dd/MM/yyyy")
 	private Date fechaNacMascota;
-	
-	@PrePersist
-	public void onPrePersist() {
-		// con esto se genera el codigo automaticamente
-		this.codMascota = "MAS" + StringUtils.leftPad(String.valueOf(contador.getAndIncrement()), 7, '0');
-	}
 
 }

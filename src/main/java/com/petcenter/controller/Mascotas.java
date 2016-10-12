@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -203,14 +204,23 @@ public class Mascotas {
 	}
 	
 	@RequestMapping(value = "/mascotas/guardar", method = { RequestMethod.POST })
-	public String guardarmascota(@RequestParam("file") MultipartFile file, Model model, @Valid Mascota mascota, BindingResult bindingResult) throws IOException {
+	public String guardarmascota(@RequestParam("file") MultipartFile file, Model model, @Valid Mascota mascota, 
+			BindingResult bindingResult, Exception exception) throws IOException {
+		
 		if (bindingResult.hasErrors()) {
+			model.addAttribute("clientes", clienteRep.findAll());
+			model.addAttribute("especies", especieRep.findAll());
+			model.addAttribute("generos", generoMascotaRep.findAll());
+			model.addAttribute("relacionclientes", relCLienteMascotaRep.findAll());
+			model.addAttribute("mascota", mascota);
 			return "crearmascota";
 		} else {
+			mascota.setCodMascota("MAS" + StringUtils.leftPad(String.valueOf(mascotaRep.countRows() + 1), 7, '0'));
 			mascota.setFotoMascota(file.getBytes());
 			mascotaRep.save(mascota);
 			return "redirect:/mascotas";
 		}
+		
 	}
 	
 }

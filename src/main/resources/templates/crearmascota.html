@@ -76,7 +76,7 @@
 				        <div class="form-group">
 						    <label for="nomMascota" class="col-sm-3 control-label">Nombres</label>
 						    <div class="col-sm-9">
-						      <input type="text" class="form-control" id="nomMascota" name="nomMascota" placeholder="" />
+						      <input type="text" th:value="${mascota.nomMascota}" class="form-control" id="nomMascota" name="nomMascota" placeholder="" />
 						    </div>
 						</div>
 						
@@ -126,13 +126,13 @@
 						  	  <label>Estado</label>
 							  <div class="radio">
 								  <label>
-								    <input type="radio" name="estadoMascota" id="estadoMascota" value="true" />
+								    <input type="radio" name="estadoMascota" id="estadoMascota" value="true" checked="checked" />
 								    Activo
 								  </label>
 								</div>
 								<div class="radio">
 								  <label>
-								    <input type="radio" name="estadoMascotas" id="estadoMascota" value="false" checked="checked" />
+								    <input type="radio" name="estadoMascota" id="estadoMascota" value="false" />
 								    Inactivo
 								  </label>
 							    </div>
@@ -142,7 +142,7 @@
 						  <div class="form-group">
 							    <label for="descMascota" class="col-sm-3 control-label">Caracteristicas Generales</label>
 							    <div class="col-sm-9">
-							    	<textarea class="form-control" id="descMascota" name="descMascota"></textarea>
+							    	<textarea th:text="${mascota.descMascota}" class="form-control" id="descMascota" name="descMascota"></textarea>
 							    </div>
 							</div>
 				        

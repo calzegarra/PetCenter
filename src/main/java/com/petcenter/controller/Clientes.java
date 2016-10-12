@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -199,6 +200,7 @@ public class Clientes {
 			model.addAttribute("cliente", cliente);
 			return "crearcliente";
 		} else {
+			cliente.setCodCliente("CLI" + StringUtils.leftPad(String.valueOf(clienteRepository.countRows()+1), 7, '0'));
 			clienteRepository.save(cliente);
 			return "redirect:/clientes";
 		}

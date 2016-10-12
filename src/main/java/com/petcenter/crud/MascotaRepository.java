@@ -21,4 +21,7 @@ public interface MascotaRepository extends CrudRepository<Mascota, Long> {
 	@Query("select m from Mascota m inner join m.cliente c where c.nomCliente = ?1 and c.apePaternoCliente = ?2 and c.apeMaternoCliente = ?3")
 	Page<Mascota> findByNombreCompletoCliente(String nombreCliente, String apPaterno, String apMaterno, Pageable pegeable);
 	
+	@Query("select count(m.idMascota) FROM Mascota m")
+	int countRows();
+	
 }
