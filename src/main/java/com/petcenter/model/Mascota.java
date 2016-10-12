@@ -31,6 +31,8 @@ public class Mascota {
 	private String codMascota;
 	
 	@Column(name="nommascota")
+	@NotNull(message="Debe informar Nombre")
+	@NotBlank(message="Debe informar Nombre")
 	private String nomMascota;
 	
 	@ManyToOne

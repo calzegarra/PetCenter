@@ -241,22 +241,33 @@ public class Mascotas {
 		model.addAttribute("generos", generoMascotaRep.findAll());
 		model.addAttribute("relacionclientes", relCLienteMascotaRep.findAll());
 		model.addAttribute("fechaNacimiendo", new Util().DatetoString(mascota.getFechaNacMascota()));
-		session.setAttribute("codMascota", mascota.getCodMascota());
 		return "modificarmascota";
 	}
 	
 	@RequestMapping(value = "/mascotas/actualizar", method = { RequestMethod.POST })
 	public String actualizarcliente(HttpSession session, @RequestParam("file") MultipartFile file, Model model, 
 			@Valid Mascota mascota, BindingResult bindingResult) throws IOException {
-		new Util().log(this.getClass(), "test  "+ file.getSize());
-		if(file.getSize() > 0){
-			mascota.setFotoMascota(file.getBytes());
+		
+		if(bindingResult.hasErrors()){
+			model.addAttribute("mascota", mascota);
+			model.addAttribute("clientes", clienteRep.findAll());
+			model.addAttribute("especies", especieRep.findAll());
+			model.addAttribute("generos", generoMascotaRep.findAll());
+			model.addAttribute("relacionclientes", relCLienteMascotaRep.findAll());
+			model.addAttribute("fechaNacimiendo", new Util().DatetoString(mascota.getFechaNacMascota()));
+			return "modificarmascota";
 		} else {
-			Mascota mascotaEncontrada = mascotaRep.findByIdMascota(mascota.getIdMascota());
-			mascota.setFotoMascota(mascotaEncontrada.getFotoMascota());
+			
+			if(file.getSize() > 0){
+				mascota.setFotoMascota(file.getBytes());
+			} else {
+				Mascota mascotaEncontrada = mascotaRep.findByIdMascota(mascota.getIdMascota());
+				mascota.setFotoMascota(mascotaEncontrada.getFotoMascota());
+			}
+			mascotaRep.save(mascota);
+			return "redirect:/mascotas";
+			
 		}
-		mascotaRep.save(mascota);
-		return "redirect:/mascotas";
 	}
 	
 	@ResponseBody

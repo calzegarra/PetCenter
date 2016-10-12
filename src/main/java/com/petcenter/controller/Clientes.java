@@ -155,7 +155,7 @@ public class Clientes {
 			} else {
 				nextPage = String.valueOf(clientes.getTotalPages());
 			}
-
+			
 			model.addAttribute("nextPage", nextPage);
 
 		} else {
@@ -222,8 +222,20 @@ public class Clientes {
 
 	@RequestMapping(value = "/clientes/actualizar", method = { RequestMethod.POST })
 	public String actualizarcliente(Model model, @Valid Cliente cliente, BindingResult bindingResult) {
-		clienteRepository.save(cliente);
-		return "redirect:/clientes";
+		if (bindingResult.hasErrors()) {
+			model.addAttribute("cliente", cliente);
+			model.addAttribute("fechaNacimiendo", new Util().DatetoString(cliente.getFecNacCliente()));
+			model.addAttribute("clienteEnc", clienteRepository.findByIdCliente(cliente.getIdCliente()));
+			model.addAttribute("tipoDocumentos", tipoDocumentosRep.findAll());
+			model.addAttribute("tipoClientes", tipoClienteRep.findAll());
+			model.addAttribute("generos", generoRep.findAll());
+			model.addAttribute("sedes", sedeRep.findAll());
+			model.addAttribute("distritos", distritoRep.findAll());
+			return "modificarcliente";
+		} else {
+			clienteRepository.save(cliente);
+			return "redirect:/clientes";
+		}
 	}
 
 }
