@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.petcenter.crud.ClienteRepository;
+import com.petcenter.crud.EspecieRepository;
 import com.petcenter.crud.GeneroMascotaRepository;
 import com.petcenter.crud.MascotaRepository;
 import com.petcenter.crud.RazaRepository;
@@ -44,6 +45,9 @@ public class Mascotas {
 	
 	@Autowired
 	RelClienteMascotaRepository relCLienteMascotaRep;
+	
+	@Autowired
+	EspecieRepository especieRep;
 	
 	@RequestMapping("/mascotas")
 	public void mascotasInit(HttpServletRequest request, Model model, @RequestParam(value = "buscarpor", required=false, defaultValue = "0") String buscarpor) {
@@ -119,7 +123,7 @@ public class Mascotas {
 	public String crearmascota(Model model) {
 		model.addAttribute("mascota", new Mascota());
 		model.addAttribute("clientes", clienteRep.findAll());
-		model.addAttribute("razas", razaRep.findAll());
+		model.addAttribute("especies", especieRep.findAll());
 		model.addAttribute("generos", generoMascotaRep.findAll());
 		model.addAttribute("relacionclientes", relCLienteMascotaRep.findAll());
 		return "crearmascota";
