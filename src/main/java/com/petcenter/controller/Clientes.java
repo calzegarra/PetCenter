@@ -221,8 +221,7 @@ public class Clientes {
 	}
 
 	@RequestMapping(value = "/clientes/actualizar", method = { RequestMethod.POST })
-	public String actualizarcliente(Model model, @Valid Cliente cliente, BindingResult bindingResult)
-			throws ParseException {
+	public String actualizarcliente(Model model, @Valid Cliente cliente, BindingResult bindingResult) {
 		clienteRepository.save(cliente);
 		return "redirect:/clientes";
 	}

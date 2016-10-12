@@ -10,6 +10,7 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.commons.lang.StringUtils;
@@ -39,6 +40,7 @@ import com.petcenter.crud.TipoDocumentoRepository;
 import com.petcenter.dto.MascotaBusquedaDto;
 import com.petcenter.dto.MascotaDto;
 import com.petcenter.model.Mascota;
+import com.petcenter.util.Util;
 
 @Controller
 public class Mascotas {
@@ -231,18 +233,34 @@ public class Mascotas {
 	}
 	
 	@RequestMapping("/mascotas/modificar/{id}")
-	public String modificarmascota(@PathVariable("id") long id, Model model) {
+	public String modificarmascota(HttpSession session, @PathVariable("id") long id, Model model) {
 		Mascota mascota = mascotaRep.findByIdMascota(id);
 		model.addAttribute("mascota", mascota);
 		model.addAttribute("clientes", clienteRep.findAll());
 		model.addAttribute("especies", especieRep.findAll());
 		model.addAttribute("generos", generoMascotaRep.findAll());
 		model.addAttribute("relacionclientes", relCLienteMascotaRep.findAll());
+		model.addAttribute("fechaNacimiendo", new Util().DatetoString(mascota.getFechaNacMascota()));
+		session.setAttribute("codMascota", mascota.getCodMascota());
 		return "modificarmascota";
 	}
 	
-	@RequestMapping(value = "/img_mascota/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+	@RequestMapping(value = "/mascotas/actualizar", method = { RequestMethod.POST })
+	public String actualizarcliente(HttpSession session, @RequestParam("file") MultipartFile file, Model model, 
+			@Valid Mascota mascota, BindingResult bindingResult) throws IOException {
+		new Util().log(this.getClass(), "test  "+ file.getSize());
+		if(file.getSize() > 0){
+			mascota.setFotoMascota(file.getBytes());
+		} else {
+			Mascota mascotaEncontrada = mascotaRep.findByIdMascota(mascota.getIdMascota());
+			mascota.setFotoMascota(mascotaEncontrada.getFotoMascota());
+		}
+		mascotaRep.save(mascota);
+		return "redirect:/mascotas";
+	}
+	
 	@ResponseBody
+	@RequestMapping(value = "/img_mascota/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
 	public byte[] getImageAsByteArray(@PathVariable("id") long id) throws IOException {
 	    Mascota m = mascotaRep.findByIdMascota(id);
  		InputStream is = new ByteArrayInputStream(m.getFotoMascota());
