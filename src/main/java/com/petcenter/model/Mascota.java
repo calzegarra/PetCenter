@@ -49,7 +49,6 @@ public class Mascota {
 	private Raza raza;
 	
 	@Column(name="fotomascota")
-	@NotNull(message="Debe informar Foto")
 	private byte[] fotoMascota;
 	
 	@Column(name="estadomascota")

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Pet Center</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap-theme.min.css}" />
+<link rel="stylesheet" type="text/css" th:href="@{/css/app.css}" />
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="cabecera"><img th:src="@{/image/logo-petcenter.png}" /></div>
+			</div>
+		</div>
+		<div class="row">
+			<br /><br />
+			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+				<ul class="nav nav-pills nav-stacked">
+					<li role="presentation"><a th:href="@{/}">Bienvenidos</a></li>
+				 	<li role="presentation" class="active"><a th:href="@{/clientesmascotas}">Gestión de Clientes y Mascotas</a></li>
+				  	<li role="presentation"><a href="#">Gestión de Atención Médica</a></li>
+				  	<li role="presentation"><a href="#">Gestión de Laboratorio Clínico</a></li>
+				</ul>
+				<br />
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+				<ol class="breadcrumb">
+				  <li><a th:href="@{/mascotas/}">Mascotas</a></li>
+				  <li class="active">Crear</li>
+				</ol>
+				
+				<form class="form-horizontal" enctype="multipart/form-data" method="post" th:action="@{/mascotas/actualizar}" th:object="${mascota}">
+				
+					<fieldset class="well the-fieldset">
+					
+				        <legend class="the-legend">Datos del Cliente</legend>
+				        	
+				  		<div th:if="${#fields.hasErrors()}">
+			       	
+					        <div class="alert alert-danger" role="alert">
+					        
+						  		<ul>
+								  <li th:each="err : ${#fields.errors('*')}" th:text="${err}"></li>
+								</ul>
+							
+							</div>
+						
+						</div>
+						
+						  <div class="form-group">
+						    <label for="cliente" class="col-sm-3 control-label">Cliente</label>
+						    <div class="col-sm-9">
+						      <select class="form-control" id="cliente" name="cliente">
+						      	<option th:each="c : ${clientes}" th:value="${c.idCliente}" th:text="${c.datosCliente()}"></option>
+						      </select>
+						    </div>
+						  </div>
+						  
+						  <div class="form-group">
+						    <label for="relClienteMascota" class="col-sm-3 control-label">Relación con la Mascota</label>
+						    <div class="col-sm-9">
+						      <select class="form-control" id="relClienteMascota" name="relClienteMascota">
+							  	<option th:each="rc : ${relacionclientes}" th:value="${rc.idRelClienteMascota}" th:text="${rc.descripcionRelClienteMascota}"></option>					      
+						      </select>
+						    </div>
+						  </div>
+						  
+					</fieldset>
+					
+					<fieldset class="well the-fieldset">
+					
+				        <legend class="the-legend">Datos de la Mascota</legend>
+				        
+				        <div class="form-group">
+						    <label for="nomMascota" class="col-sm-3 control-label">Nombres</label>
+						    <div class="col-sm-9">
+						      <input type="text" th:value="${mascota.nomMascota}" class="form-control" id="nomMascota" name="nomMascota" placeholder="" />
+						    </div>
+						</div>
+						
+						<div class="form-group">
+						    <label for="especie" class="col-sm-3 control-label">Especie</label>
+						    <div class="col-sm-9">
+						      <select class="form-control" id="especie" name="especie">
+							  	<option th:each="e : ${especies}" th:value="${e.idEspecie}" th:text="${e.descripcionEspecie}"></option>					      
+						      </select>
+						    </div>
+						</div>
+						
+						<div class="form-group">
+						    <label for="raza" class="col-sm-3 control-label">Raza</label>
+						    <div class="col-sm-9">
+						      <select class="form-control" id="raza" name="raza">
+						      </select>
+						    </div>
+						</div>
+						
+						<div class="form-group">
+						    <label for="generoMascota" class="col-sm-3 control-label">Genero</label>
+						    <div class="col-sm-9">
+						      <select class="form-control" id="generoMascota" name="generoMascota">
+							  	<option th:each="g : ${generos}" th:value="${g.idGeneroMascota}" th:text="${g.descripcionGenMascota}"></option>					      
+						      </select>
+						    </div>
+						</div>
+						
+						<div class="form-group">
+						    <label for="fechaNacMascota" class="col-sm-3 control-label">Fecha Nacimiento</label>
+						    <div class="col-sm-9">
+						      <input type="text" class="form-control" id="fechaNacMascota" name="fechaNacMascota" placeholder="" />
+						    </div>
+						</div>
+						
+						<div class="form-group">
+						    <label for="fotoMascota" class="col-sm-3 control-label">Foto</label>
+						    <div class="col-sm-9">
+						      <img th:src="@{'/img_mascota/'+${mascota.idMascota}}" width="250" height="250" />
+						      <br/><br/>
+						      <input type="file" class="form-control" id="file" name="file" placeholder="" />
+						    </div>
+						</div>
+						
+						<div class="form-group">
+						  	<div class="col-sm-3"></div>
+						  	<div class="col-sm-9">
+						  	  <label>Estado</label>
+							  <div class="radio">
+								  <label>
+								    <input type="radio" name="estadoMascota" id="estadoMascota" value="true" checked="checked" />
+								    Activo
+								  </label>
+								</div>
+								<div class="radio">
+								  <label>
+								    <input type="radio" name="estadoMascota" id="estadoMascota" value="false" />
+								    Inactivo
+								  </label>
+							    </div>
+							 </div>
+						  </div>
+						  
+						  <div class="form-group">
+							    <label for="descMascota" class="col-sm-3 control-label">Caracteristicas Generales</label>
+							    <div class="col-sm-9">
+							    	<textarea th:text="${mascota.descMascota}" class="form-control" id="descMascota" name="descMascota"></textarea>
+							    </div>
+							</div>
+				        
+				        <div class="form-group">
+						    <div class="col-sm-offset-3 col-sm-9">
+						      <button type="submit" class="btn btn-default">Guardar</button>
+						    </div>
+						</div>
+				    
+				    </fieldset>
+					 
+			    </form>
+			    
+			</div>
+		</div>
+		<br /><br />
+		<br /><br />
+	</div>
+	<script type="text/javascript" th:src="@{/js/jquery-3.1.1.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/moment.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap-datetimepicker.js}"></script>
+	<script th:inline="javascript">
+	$(document).ready(function(){
+		$("#fechaNacMascota").datetimepicker({
+            format: 'DD/MM/YYYY'
+        });
+		
+		loadRaza($("#especie").val());
+		
+		$("#especie").change(function(){
+			loadRaza($(this).val())
+		});
+		
+		function loadRaza(especie) {
+			$("#raza").empty();	
+			$.get([[@{/razas/}]]+especie, function(data){
+				$.each(data, function(k,v){
+					$("#raza").append('<option value="'+v.idRaza+'">'+v.descripcionRaza+'</option>');
+				});
+			});
+		}
+		
+	});
+	</script>
+</body>
+</html>

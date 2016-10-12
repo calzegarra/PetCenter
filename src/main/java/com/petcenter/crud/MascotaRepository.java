@@ -9,6 +9,8 @@ import com.petcenter.model.Mascota;
 
 public interface MascotaRepository extends CrudRepository<Mascota, Long> {
 	
+	Mascota findByIdMascota(long id);
+	
 	Page<Mascota> findAll(Pageable pegeable);
 	
 	Page<Mascota> findByCodMascota(String codigoMascota, Pageable pegeable);

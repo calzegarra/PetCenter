@@ -1,9 +1,14 @@
 package com.petcenter.controller;
 
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -11,6 +16,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,6 +26,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.petcenter.crud.ClienteRepository;
@@ -221,6 +228,28 @@ public class Mascotas {
 			return "redirect:/mascotas";
 		}
 		
+	}
+	
+	@RequestMapping("/mascotas/modificar/{id}")
+	public String modificarmascota(@PathVariable("id") long id, Model model) {
+		Mascota mascota = mascotaRep.findByIdMascota(id);
+		model.addAttribute("mascota", mascota);
+		model.addAttribute("clientes", clienteRep.findAll());
+		model.addAttribute("especies", especieRep.findAll());
+		model.addAttribute("generos", generoMascotaRep.findAll());
+		model.addAttribute("relacionclientes", relCLienteMascotaRep.findAll());
+		return "modificarmascota";
+	}
+	
+	@RequestMapping(value = "/img_mascota/{id}", method = RequestMethod.GET, produces = MediaType.IMAGE_PNG_VALUE)
+	@ResponseBody
+	public byte[] getImageAsByteArray(@PathVariable("id") long id) throws IOException {
+	    Mascota m = mascotaRep.findByIdMascota(id);
+ 		InputStream is = new ByteArrayInputStream(m.getFotoMascota());
+		BufferedImage img = ImageIO.read(is);
+	    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	    ImageIO.write(img, "png",bos);
+	    return bos.toByteArray();
 	}
 	
 }
