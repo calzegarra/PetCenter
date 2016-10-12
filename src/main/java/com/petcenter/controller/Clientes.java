@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +26,7 @@ import com.petcenter.crud.GeneroRepository;
 import com.petcenter.crud.SedeRepository;
 import com.petcenter.crud.TipoClienteRepository;
 import com.petcenter.crud.TipoDocumentoRepository;
+import com.petcenter.dto.ClienteBusquedaDto;
 import com.petcenter.dto.ClienteDto;
 import com.petcenter.model.Cliente;
 import com.petcenter.util.Util;
@@ -52,23 +54,67 @@ public class Clientes {
 
 	@RequestMapping("/clientes")
 	public void clientesInit(HttpServletRequest request, Model model,
-			@RequestParam(value = "buscarpor", required = false, defaultValue = "0") String buscarpor) {
-		clientes(request, 1, model, buscarpor, "");
+			@RequestParam(value = "buscarpor", required = false, defaultValue = "0") String buscarpor, @Valid ClienteBusquedaDto clientebusqueda, 
+			BindingResult bindingResult) {
+		clientes(request, 1, model, buscarpor, "", clientebusqueda, bindingResult);
 	}
 
 	@RequestMapping("/clientes/{page}")
 	public String clientes(HttpServletRequest request, @PathVariable("page") int page, Model model,
 			@RequestParam(value = "buscarpor", required = false, defaultValue = "0") String buscarpor,
-			@RequestParam(value = "codigo", required = false) String codigo) {
+			@RequestParam(value = "codigo", required = false) String codigo, 
+			@Valid @ModelAttribute("clientebusqueda") ClienteBusquedaDto clientebusqueda, BindingResult bindingResult) {
+		
+		model.addAttribute("clientebusqueda", clientebusqueda);
+		
 		model.addAttribute("tipoDocumentos", tipoDocumentosRep.findAll());
 
 		List<ClienteDto> clientesDto = new ArrayList<>();
 
 		Page<Cliente> clientes = null;
 		if (buscarpor.equals("1")) {
-			clientes = clienteRepository.findByCodCliente(codigo, new PageRequest(page - 1, 1));
+			
+			if (codigo.isEmpty()) {
+				ObjectError error = new ObjectError("codigo", "Debe ingresar el codigo");
+				bindingResult.addError(error);
+			}
+			if (bindingResult.hasErrors()) {
+				return "clientes";
+			} else {
+				clientes = clienteRepository.findByCodCliente(codigo.trim(), new PageRequest(page - 1, 1));
+			}
+			
+		} else if (buscarpor.equals("2")) {
+			
+			if (clientebusqueda.getNombre().isEmpty()) {
+				ObjectError error = new ObjectError("nombre", "Debe ingresar el Nombre");
+				bindingResult.addError(error);
+			}
+			if (clientebusqueda.getNroDocumento().isEmpty()) {
+				ObjectError error = new ObjectError("nroDocumento", "Debe ingresar el Número de Documento");
+				bindingResult.addError(error);
+			}
+			if (clientebusqueda.getApMaterno().isEmpty()) {
+				ObjectError error = new ObjectError("nombre", "Debe ingresar el Apellido Paterno");
+				bindingResult.addError(error);
+			}
+			if (clientebusqueda.getApMaterno().isEmpty()) {
+				ObjectError error = new ObjectError("nombre", "Debe ingresar el Apellido Materno");
+				bindingResult.addError(error);
+			}
+			if (bindingResult.hasErrors()) {
+				return "clientes";
+			} else {
+				clientes = clienteRepository.findByNomClienteAndTipoDocumentoAndNroDocumentoAndApePaternoClienteAndApeMaternoCliente
+						(clientebusqueda.getNombre().trim(), tipoDocumentosRep.findByIdTipoDocumento(clientebusqueda.getTipoDocumento()), 
+						 clientebusqueda.getNroDocumento().trim(), clientebusqueda.getApPaterno().trim(), clientebusqueda.getApMaterno().trim(), 
+						 new PageRequest(page - 1, 1));
+			}
+			
 		} else {
+			
 			clientes = clienteRepository.findAll(new PageRequest(page - 1, 6));
+			
 		}
 		
 		boolean existaData = false;

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,7 +55,8 @@ public class ContactosSecundarios {
 	}
 	
 	@RequestMapping(value = "/clientes/contactosecundario", method = { RequestMethod.POST })
-	public String guardar(Model model, @RequestParam("idContSecundario") String id, @Valid ContactoSecundario contactosecundario, BindingResult bindingResult) {
+	public String guardar(Model model, @RequestParam("idContSecundario") String id, 
+			@Valid @ModelAttribute("contactosecundario") ContactoSecundario contactosecundario, BindingResult bindingResult) {
 		if(bindingResult.hasErrors()){
 			model.addAttribute("contactosecundario", contactosecundario);
 			model.addAttribute("idContactoSecundario", ""+contactosecundario.getIdContactoSecundario());
@@ -65,7 +67,7 @@ public class ContactosSecundarios {
 				ContactoSecundario contactoSecundarioEcontrado = contactoSecundarioRep.findByIdContactoSecundario(Long.valueOf(id));
 				contactoSecundarioEcontrado.setNomContactoSec(contactosecundario.getNomContactoSec());
 				contactoSecundarioEcontrado.setApePaternoContactoSec(contactosecundario.getApePaternoContactoSec());
-				contactoSecundarioEcontrado.setApePaternoContactoSec(contactosecundario.getApeMaternoContactoSec());
+				contactoSecundarioEcontrado.setApeMaternoContactoSec(contactosecundario.getApeMaternoContactoSec());
 				contactoSecundarioEcontrado.setParentContactoSecCli(contactosecundario.getParentContactoSecCli());
 				contactoSecundarioEcontrado.setCelContactoSec(contactosecundario.getCelContactoSec());
 				contactoSecundarioEcontrado.setTelfDomContactoSec(contactosecundario.getTelfDomContactoSec());
