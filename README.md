@@ -3,6 +3,10 @@ Un proyecto hecho con Spring Framework
 
 Herramienta de desarrollo: [Spring Tool Suite](https://spring.io/tools/sts)
 
+![Config](init.png)
+
+![Config](config.png)
+
 ![Config](appconfig.png)
 
 El nivel de seguridad usa la siguiente configuracion
@@ -23,4 +27,3 @@ spring.datasource.username=root
 spring.datasource.password=root
 
 spring.datasource.driver-class-name=com.mysql.jdbc.Driver
-
