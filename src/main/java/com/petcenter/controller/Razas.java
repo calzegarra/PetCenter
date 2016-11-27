@@ -1,7 +1,9 @@
 package com.petcenter.controller;
 
-import java.util.List;
-
+import com.petcenter.crud.EspecieRepository;
+import com.petcenter.crud.RazaRepository;
+import com.petcenter.model.Especie;
+import com.petcenter.model.Raza;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,10 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.petcenter.crud.EspecieRepository;
-import com.petcenter.crud.RazaRepository;
-import com.petcenter.model.Especie;
-import com.petcenter.model.Raza;
+import java.util.List;
 
 @Controller
 public class Razas {

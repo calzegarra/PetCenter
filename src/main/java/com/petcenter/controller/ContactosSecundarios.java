@@ -1,23 +1,18 @@
 package com.petcenter.controller;
 
-import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import com.petcenter.crud.ClienteRepository;
 import com.petcenter.crud.ContactoSecundarioRepository;
 import com.petcenter.crud.ParentContactoSecCliRepository;
 import com.petcenter.model.Cliente;
 import com.petcenter.model.ContactoSecundario;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 @Controller
 public class ContactosSecundarios {

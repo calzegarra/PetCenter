@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class Index {
-	
-	@RequestMapping("/index")
+
+	@RequestMapping(value={"/","/index"})
 	public String index(Model model) {
 		model.addAttribute("titulo", "Pet Center");
 		return "index";

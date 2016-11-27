@@ -1,13 +1,12 @@
 package com.petcenter.controller;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-
-import org.apache.commons.lang.StringUtils;
+import com.petcenter.crud.*;
+import com.petcenter.dto.ClienteBusquedaDto;
+import com.petcenter.dto.ClienteDto;
+import com.petcenter.model.Cliente;
+import com.petcenter.util.Util;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,22 +14,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
-import com.petcenter.crud.ClienteRepository;
-import com.petcenter.crud.DistritoRepository;
-import com.petcenter.crud.GeneroRepository;
-import com.petcenter.crud.SedeRepository;
-import com.petcenter.crud.TipoClienteRepository;
-import com.petcenter.crud.TipoDocumentoRepository;
-import com.petcenter.dto.ClienteBusquedaDto;
-import com.petcenter.dto.ClienteDto;
-import com.petcenter.model.Cliente;
-import com.petcenter.util.Util;
+import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class Clientes {
